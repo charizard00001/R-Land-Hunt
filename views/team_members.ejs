@@ -1,0 +1,194 @@
+<%- include ('../views/includes/head', {pagetitle: 'Register Your Team' }) %>
+    <link rel="stylesheet" href="/CSS/team_members.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        #container {
+            max-height: 40rem;
+            overflow-y: auto;
+            /* Enable vertical scrolling if content overflows */
+        }
+    </style>
+    <script src="/scripts/team_members.js"></script>
+    </head>
+
+    <body>
+
+        <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span>
+        </section>
+        <div class="container" id="container" style="z-index: 10; padding: 2rem;">
+            <% if (inputData.error) { %>
+                <div class="alert">
+                    <h2>Invalid Input</h2>
+                    <p style="color: black; font-weight: 600; font-size: 1.2rem;">
+                        <%= inputData.error %>
+                    </p>
+                </div>
+                <br><br>
+                <% } %>
+
+                    <h1 class="main-heading">Team Information</h1>
+                    <hr>
+                    <!-- form start -->
+                    <form class="form-class" id="teamForm" action="/registerteam" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+                        <!-- Hunt name -->
+                        <div class="form-control">
+                            <div class="heading-field">
+                                <h3 class="field-head">Which Hunt to Register</h3>
+                            </div>
+                            <div class="input-div" id="toadd">
+                                <select name="huntname" id="huntname" class="form-control-input" required>
+                                    <option disabled selected>Select Hunt</option>
+                                    <% for(var i=0; i<names.length; i++) { %>
+                                        <% if(names[i]===inputData.huntname) { %>
+                                            <option value="<%= names[i] %>" selected>
+                                                <%= names[i] %>
+                                            </option>
+                                            <% } else { %>
+                                                <option value="<%= names[i] %>">
+                                                    <%= names[i] %>
+                                                </option>
+                                                <% } %>
+                                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Team Name -->
+                        <div class="form-control">
+                            <div class="heading-field">
+                                <h3 class="field-head">Team Name </h3>
+                            </div>
+                            <div class="input-div">
+                                <input type="text" class="form-control-input" id="team-name" name="teamname"
+                                    value="<%= inputData.teamname%>" required>
+
+                            </div>
+                        </div>
+                        <!-- Team Name Ends -->
+
+                        <!-- Team Members -->
+                        <div class="form-control" id="membersContainer">
+                            <div class="heading-field">
+                                <h3 class="field-head">Team Members</h3>
+                            </div>
+                            <div id="members" class="field-inputs">
+                                <div class="member-input">
+                                    <h4>Member 1</h4>
+                                    <input type="text" class="form-control-input" placeholder="Enter Team Captain Name"
+                                        name="Name" required>
+                                    <input type="number" class="form-control-input"
+                                        placeholder="Enter Enrollment Number" name="enrollementNo" required>
+                                    <input type="number" class="form-control-input" placeholder="Enter Phone Number"
+                                        name="phonenumber" required>
+                                    <input type="email" class="form-control-input" placeholder="Enter Email"
+                                        name="email" required>
+                                </div>
+                                <div class="member-input">
+                                    <h4>Member 2</h4>
+                                    <input type="text" class="form-control-input" placeholder="Enter Member Name"
+                                        name="Name" required>
+                                    <input type="number" class="form-control-input"
+                                        placeholder="Enter Enrollment Number" name="enrollementNo" required>
+                                    <input type="number" class="form-control-input" placeholder="Enter Phone Number"
+                                        name="phonenumber" required>
+                                    <input type="email" class="form-control-input" placeholder="Enter Email"
+                                        name="email" required>
+                                </div>
+                            </div>
+                            <div class="buttons">
+                                <button type="button" class="button button1" onclick="addMember()">Add Member</button>
+                                <button type="button" class="button button1" id="removeButton"
+                                    onclick="removeMember()">Remove Member</button>
+                            </div>
+                        </div>
+                        <!-- Team Members Ends -->
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="center-button">Submit</button>
+
+                    </form>
+                    <!-- form ends -->
+        </div>
+
+        <script>
+            var memberCount = $("#members .member-input").length;
+            // console.log(memberCount);
+            function checkMembers() {
+                console.log(memberCount);
+                if (memberCount < 3) {
+                    $("#removeButton").hide();
+                } else {
+                    $("#removeButton").show();
+                }
+            }
+            function addMember() {
+
+                var newMember = `
+            <div class="member-input" style="display: none;">
+                <h4>Member ${memberCount}</h4>
+                <input type="text" class="form-control-input" placeholder="Enter Member Name" name="Name" required>
+                <input type="number" class="form-control-input" placeholder="Enter Enrollment Number" name = "enrollementNo"  required>
+                <input type="number" class="form-control-input" placeholder="Enter Phone Number" name="phonenumber"  required>
+                <input type="email" class="form-control-input" placeholder="Enter Email" name="email" required>
+            </div>
+        `;
+                $("#members").append(newMember);
+                $("#members .member-input:last-child").slideDown();
+
+                // Scroll to the newly added member
+                $("html, body").animate({
+                    scrollTop: $("#members .member-input:last-child").offset().top
+                }, 500);
+                memberCount++;
+                checkMembers();
+            }
+
+            function removeMember() {
+                $("#members .member-input:last-child").slideUp(function () {
+                    $(this).remove();
+                });
+                memberCount--;
+                checkMembers();
+            }
+
+            checkMembers();
+        </script>
+
+        <%- include ('./includes/foot') %>

@@ -1,0 +1,49 @@
+<%- include ('../views/includes/head', {pagetitle: 'Hunt'}) %>
+    <link rel="stylesheet" href="./CSS/huntinfo.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+</head>
+<body>
+  <%- include('../views/includes/header') %>
+  
+  <div class="map" id="map" style="height: 700px; width: 800px;"></div>
+    <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
+      <div class="signin" id="signin"> 
+        
+        <div class="content"> 
+          
+          <div class="form" id ="form"> 
+               <form action="/savehunt" method="POST">
+                <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+                <input type="hidden" name="route" id="route">
+
+                <div class="inputBox"> 
+                  <input type="text" id="huntname" name="huntname" value="<%= hunt ? hunt.huntname : '' %>" required <%= hunt.huntname != '' ? 'readonly' : '' %> > <i>Hunt Name</i> 
+              </div>
+              <br>
+              <div class="inputBox"> 
+                <input type="number" id="n_clues" name="n_clues" min="1" value="<%= hunt && hunt.data.length > 0 ? hunt.data.length : '' %>" required > <i>Number of clues</i> 
+              </div>
+             
+                  <div id="input-container"></div>
+                </form>
+                
+        
+              <div class="inputBox" style="text-align: center;" id="enter_btn"> 
+        
+                <button type="submit" onclick = "add()">Enter</button>
+                 
+              </div> 
+            </div> 
+        
+           </div> 
+        
+          </section> <!-- partial --> 
+          <script>
+            let huntnames = '<%= huntNames %>';
+            console.log(huntnames);
+            document.getElementById('route').value = window.location.pathname;
+            </script>
+            <script src="./scripts/huntinfo.js"></script>
+          <%- include ('./includes/foot') %>
+

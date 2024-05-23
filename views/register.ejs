@@ -1,0 +1,58 @@
+<%- include ('../views/includes/head', {pagetitle: 'Register'}) %> 
+
+  <link rel="stylesheet" href="./CSS/register.css"> 
+
+ </head> 
+
+ <body> <!-- partial:index.partial.html --> 
+  <%- include('../views/includes/header') %>
+
+  <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
+
+   <div class="signin"> 
+
+    <div class="content"> 
+
+     <h2>Welcome, You can register here</h2> 
+
+     <div class="form"> 
+      <% if (inputData.error) { %>
+        <div class="alert">
+          <h2>Invalid Input</h2>
+          <p style="color: black; font-weight: 600; font-size: 1.2rem;"><%= inputData.error %></p>
+        </div>
+      <% } %>
+      <form action="/signup" method="POST">
+        <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+      <div class="inputBox"> 
+
+       <input type="number" id="enrollementNo" required name="enrollementNo" value="<%= inputData.enrollementNo %>"> <i>Enrollment Number</i> 
+        <br><br>
+      </div> 
+
+      <div class="inputBox"> 
+
+       <input type="password" required name ="password" id="password" value="<%= inputData.password %>"> <i>Password</i> 
+        
+      <div class="inputBox"> 
+        <br>
+      <div class="inputBox"> 
+
+        <input type="password" required name="confirmPassword" value="<%= inputData.confirmPassword %>"> <i> Confirm Password</i> 
+     
+      <div class="inputBox"> 
+
+
+       <input type="submit" value="Register">
+
+      </div> 
+    </form>
+     </div> 
+
+    </div> 
+
+   </div> 
+
+  </section> <!-- partial --> 
+
+  <%- include ('./includes/foot') %>

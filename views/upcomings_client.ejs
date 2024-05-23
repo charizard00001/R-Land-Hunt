@@ -1,0 +1,47 @@
+<%- include ('../views/includes/head', {pagetitle: 'Upcoming Hunts'}) %> 
+
+  <link rel="stylesheet" href="./CSS/upcomings.css"> 
+
+ </head> 
+
+ <body> <!-- partial:index.partial.html --> 
+   <%- include('../views/includes/header') %>
+
+  <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
+
+   <div class="signin"> 
+
+    <div class="content"> 
+
+     <div class="text">
+        <h2>Which Hunt to Enter</h2> 
+     </div>
+
+      <form action="/strthunt2" method="post">
+         <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+      <div class="form" id="form"> 
+         <select name="huntname" id="huntname" class="form-control-input" required>
+            <option value="" disabled selected>Select Hunt</option>
+            <% for(var i=0; i<names.length; i++) { %>
+               <option value="<%= names[i] %>"><%= names[i] %></option>
+            <% } %>
+         </select>
+         <div class="inputbox">
+            <input type="text" name="teamname" id="teamname" class="form-control-input" placeholder="Enter teamname" required>
+            <!-- <label for="teamname" class="form-label">Team Name</label> -->
+         </div>
+         <div class="inputbox">
+            <input type="submit" value="Enter" style="padding: 10px; background: #0f0;color: #000;font-weight: 600;font-size: 1.35em;letter-spacing: 0.05em;cursor: pointer;margin-top: 2rem;">
+         </div>
+      </div> 
+      
+      </form>
+
+    </div> 
+
+   </div> 
+
+  </section> <!-- partial --> 
+  <!-- <script src="../controllers/upcomings.controller.js"></script> -->
+
+  <%- include ('./includes/foot') %>

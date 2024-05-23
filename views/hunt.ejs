@@ -1,0 +1,27 @@
+<%- include ('../views/includes/head', {pagetitle: 'Upcoming Hunts'}) %>
+    <link rel="stylesheet" href="/CSS/upcoming.css">
+</head>
+<body>
+    <div class="center">
+        <h1 id="countdown">10:00</h1>
+        <script src="hunt.js"></script>
+        <form>
+            <div>
+                <div id="leaderboard">
+                    <h1>Leaderboard</h1>
+        
+                </div>
+            </div>
+        </form>
+        <div class="center-buttons">
+            <button class="button button1" onclick="redirectToAnotherPage()" text-align="center">Stop the HUNT</button>
+        </div>
+    </div>
+
+    <script>
+        function redirectToAnotherPage() {
+            window.location.href = 'stop_hunt.html'; 
+        }
+    </script>
+    <script src="./scripts/hunt.js"></script>
+    <%- include ('./includes/foot') %>

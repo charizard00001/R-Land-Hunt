@@ -1,0 +1,100 @@
+<!-- <% if (locals.isAuth){ %> -->
+<%- include ('../views/includes/head', {pagetitle: 'Hunt Creator' }) %>
+  <link rel="stylesheet" href="./CSS/admin-hunt-creator.css">
+
+  </head>
+
+  <body> <!-- partial:index.partial.html -->
+    <%- include('../views/includes/header') %>
+
+      <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span>
+
+        <div class="signin">
+
+          <div class="content">
+
+            <div class="form">
+
+
+              <div class="inputBox">
+
+                <input type="submit" value="Create a Hunt" onclick="redirectToAnotherPage1()">
+
+              </div>
+              <div class="inputBox">
+
+                <input type="submit" value="Edit a Hunt" onclick="redirectToAnotherPage2()">
+
+              </div>
+              <div class="inputBox">
+                <form action="/starter" method="get">
+                  <input type="submit" value="Start a Hunt">
+                </form>
+              </div>
+              <div class="inputBox">
+
+                <input type="submit" value="Show Upcoming Hunts" onclick="redirectToAnotherPage4()">
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section> <!-- partial -->
+      <script>
+
+        function redirectToAnotherPage1() {
+          window.location.href = '/huntinfo';
+        }
+
+        function redirectToAnotherPage2() {
+          window.location.href = '/edit';
+        }
+
+        function redirectToAnotherPage3() {
+          window.location.href = '/upcomings_adrights';
+        }
+
+        function redirectToAnotherPage4() {
+          window.location.href = '/upcomings';
+        }
+
+
+      </script>
+      <%- include ('./includes/foot') %>
+        <!-- <% } %> -->

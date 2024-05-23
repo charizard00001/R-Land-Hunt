@@ -1,0 +1,92 @@
+<%- include ('../views/includes/head', {pagetitle: 'Upcoming Hunts'}) %>
+    <link rel="stylesheet" href="/CSS/clues.css">
+</head>                                                                                
+<body>
+    <%- include('../views/includes/header') %>
+<section> 
+    <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
+
+    <div class="center" id="center">
+
+        <div id="top">
+            <div id="score">
+                <h2 id="myScore">Score: 0</h2>
+            </div>
+            <div class="centre-buttons">
+                <button onclick="openPopup(),requestLeaderboard()" class="btn" >    Leaderboard    </button>
+            </div>            
+        </div>
+
+        <div class="form" id="form">
+            <div>
+                <div id="clues">
+                    <h1 id="displayClue"><%= clues[0] %></h1>
+                    <button class="btn" id="locationChecker" style="margin-top: 2rem; margin-left: 3rem;" onclick="getCurrentLocation()" >Check My Location</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="center-buttons" id="center_buttons">
+            <br>
+            <button class="btn" onclick="toggle()" id="hint_button">
+                <p id="buttonText">Show Hint</p>
+            </button>
+    
+        </div>
+
+        <br>
+
+        <div id = "bottom">
+            <p id="hint" style="display:none"><%= hints[0] %></p>
+        </div>
+
+        <div class="leaderboard" id="leaderboard">
+            <div id="fixed">
+                <h2 style="margin-top: 1rem;">Leaderboard</h2>
+                <button onclick="refreshPage()" class="btn-close">&#x21BB;</button>
+                <button class="btn-close" onclick="closePopup()">&times;</button>
+            </div>
+            <div id="insLeaderboard"></div>
+        </div>
+
+    </div> 
+
+    <div id="center2">
+        <p>Hunt has not started yet!</p>
+    </div>
+</section>
+    <script>
+        let isCompleted = false;
+        let intervalid;
+        let score = 0;
+        let scores;
+        let teamname = "<%= teamname %>";
+        // console.log(teamname);
+        let captainMail = "<%= captainMail %>";
+        // console.log(captainMail);
+        myLocations = "<%= locations %>";
+        myLocations = myLocations.split(",");
+        managedLocations = [];
+        for (let i = 0; i < myLocations.length; i += 2) {
+            if (myLocations[i + 1] !== undefined) {
+                managedLocations.push([myLocations[i], myLocations[i + 1]]);
+            } else {
+                managedLocations.push([myLocations[i]]);
+            }
+        }
+        // console.log(managedLocations);
+
+        myClues = "<%= clues %>";
+        myClues = myClues.split(",");
+        // console.log(myClues);
+
+        myHints = "<%= hints %>";
+        myHints = myHints.split(",");
+        // console.log(myHints);
+
+        myHuntname = "<%= huntname %>";
+        // console.log(myHuntname);
+    </script>
+    <script src="/scripts/client.js"></script>
+    <script src="/scripts/clues.js"></script>
+<%- include ('./includes/foot') %>

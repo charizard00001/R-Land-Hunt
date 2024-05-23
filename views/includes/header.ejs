@@ -1,0 +1,22 @@
+<nav style="position: absolute;
+left: 0px;
+top: 15px ;">
+    <ul>
+        <% if (locals.isAuth){ %>
+        <li style="position: absolute;">
+            <form action="/logout" method="POST">
+                <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+                <button style="padding: 10px;
+                position: absolute;
+                z-index: 1000000;
+                background: #0f0;
+                color: #000;
+                font-weight: 600;
+                font-size: 1.35em;
+                letter-spacing: 0.05em;
+                cursor: pointer;">Logout</button>
+            </form>
+        </li>
+        <% } %>
+    </ul>
+</nav>

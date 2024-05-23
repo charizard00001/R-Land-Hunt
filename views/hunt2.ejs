@@ -1,0 +1,109 @@
+<!doctype html>
+
+<html lang="en"> 
+
+ <head> 
+
+  <meta charset="UTF-8"> 
+
+  <title>Entering Admin Rights</title> 
+
+  <link rel="stylesheet" href="./CSS/hunt2.css"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+
+
+ </head> 
+
+ <body> <!-- partial:index.partial.html --> 
+
+  <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
+
+
+   <div class="signin"> 
+
+    <div class="content"> 
+
+     <div class="text">
+        <h1 id="countdown">10:00</h1>
+     </div>
+
+    <div class="text" style="display: flex; flex-direction: column;">
+      <h2>Leaderboard</h2>
+      
+    </div>
+    <div style=" width: 100%;">
+
+      <div id="insLeaderboard" style=" overflow-y: scroll; height: 12rem; width: 90%; "></div>
+    </div>
+    
+     <div class="form"> 
+
+      <div style="display: flex; flex-direction: row;"> 
+
+      <div class="inputBox">
+        <button class="button" id="pauser" onclick="toggleTimer(), pauser()"></button>
+      </div>
+      <div class="inputBox">
+        <form action="/endingHunt" method="post">
+        <button class="button" id="ender" onclick="endHunt()">End Hunt Now</button>
+      </form>
+      </div>
+      
+     </div> 
+
+    </div> 
+
+   </div> 
+   </div>
+
+
+  </section> <!-- partial --> 
+  <script>
+    let hunt_to_strt = "<%= startedHunt %>";
+
+    const startingMinutes = 10;
+    let time = startingMinutes * 60;
+    const countdownEl = document.getElementById('countdown');
+    let isTimerRunning = false;
+    let intervalId;
+  
+    function updateCountdown() {
+      const minutes = Math.floor(time / 60);
+      let seconds = time % 60;
+  
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+  
+      countdownEl.innerHTML = `${minutes}:${seconds}`;
+      time--;
+  
+      if (time < 0) {
+        clearInterval(intervalId);
+        countdownEl.innerHTML = "Time's up!";
+        isTimerRunning = false;
+        endHunt();
+      }
+    }
+  
+    function toggleTimer() {
+      if (isTimerRunning) {
+        clearInterval(intervalId);
+        document.querySelector('button').innerText = "Start Timer";
+      } else {
+        updateCountdown();
+        intervalId = setInterval(updateCountdown, 1000);
+        document.querySelector('button').innerText = "Pause Timer";
+      }
+  
+      isTimerRunning = !isTimerRunning;
+    }
+    document.querySelector('button').innerText = "Start Timer";
+
+    toggleTimer();
+  </script>
+  
+  <script src="/scripts/admin.js"></script>
+
+ </body>
+
+</html> 

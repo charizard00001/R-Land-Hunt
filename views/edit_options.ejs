@@ -1,0 +1,75 @@
+<%- include ('../views/includes/head', {pagetitle: 'Hunt Creator'}) %> 
+  <link rel="stylesheet" href="./CSS/admin-hunt-creator.css"> 
+
+ </head> 
+
+ <body> <!-- partial:index.partial.html --> 
+  <%- include('../views/includes/header') %>
+
+  <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
+
+   <div class="signin"> 
+
+    <div class="content">    
+
+     <div class="form"> 
+ 
+
+        <div class="inputBox"> 
+            <form action="/editing" method="post">
+              <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+            <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
+            <input type="submit" value="Complete Edit">
+             
+          </form>
+           </div>
+
+            
+            <div class="inputBox"> 
+            <form action="/appending" method="post">
+              <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+                <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
+            <input type="submit" value="Add Clues"> 
+          </form>
+           </div> 
+
+           <div class="inputBox">
+            <form action="/deleting" method="post">
+             <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+             <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
+           <input type="submit" value="Delete Clues"> 
+         </form>
+          </div>
+
+          <div class="inputBox">
+            <form action="/deleting2" method="post">
+             <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+             <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
+           <input type="submit" value="Delete Hunt"> 
+         </form>
+          </div>
+
+       <div class="inputBox">
+         <form action="/modifying" method="post">
+          <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+          <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
+        <input type="submit" value="Modify existing Hunt"> 
+      </form>
+       </div> 
+        
+       
+     </div> 
+
+    </div> 
+
+   </div> 
+
+  </section> <!-- partial --> 
+  <script>
+
+   
+    
+
+
+  </script>
+<%- include ('./includes/foot') %>
