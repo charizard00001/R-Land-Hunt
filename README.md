@@ -76,3 +76,5 @@ https://rlandhunt.onrender.com/index
 
 
 ## 🤩 Don't forget to give this repo a ⭐ if you like this repo and want to appreciate our efforts
+
+## organization repo :- https://github.com/MDGSpace-SoC-2023/capsule-corporation
