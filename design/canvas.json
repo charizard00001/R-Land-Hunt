@@ -1,0 +1,44 @@
+{
+  "pages": [
+    { "id": "page-1", "name": "The Hunt · player" },
+    { "id": "page-2", "name": "Command · organiser" }
+  ],
+  "artboards": [
+    { "file": "Join.dc.html", "x": 0, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "1 · Break the seal", "is_interactive": true },
+    { "file": "Main.dc.html", "x": 470, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "2 · The clue screen", "is_interactive": true },
+    { "file": "Unlock.dc.html", "x": 940, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "3 · Mark claimed", "is_interactive": true },
+    { "file": "Hints.dc.html", "x": 1410, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "4 · The informant", "is_interactive": true },
+    { "file": "Leaderboard.dc.html", "x": 1880, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "5 · The reckoning", "is_interactive": true },
+    { "file": "Recap.dc.html", "x": 2350, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "6 · Carry it home", "is_interactive": true },
+    { "file": "Studio.dc.html", "x": 0, "y": 0, "w": 1440, "h": 900, "page": "page-2", "title": "Hunt Studio · the corkboard", "is_interactive": true },
+    { "file": "RaceControl.dc.html", "x": 1560, "y": 0, "w": 1440, "h": 900, "page": "page-2", "title": "Race Control · the war room", "is_interactive": true },
+    { "file": "Spectator.dc.html", "x": 3120, "y": 0, "w": 1440, "h": 810, "page": "page-2", "title": "The big screen · lobby projection" }
+  ],
+  "annotations": [
+    {
+      "id": "direction",
+      "x": 0,
+      "y": -280,
+      "w": 620,
+      "page": "page-1",
+      "text": "THE CARTOGRAPHER'S DOSSIER\n\nAged nautical chart for the player. Brass compass, wax seals, rubber stamps that slam, torn paper hints.\n\nSound is synthesised in the page — nothing to download. Tap the seal, the button, the hint strips.\n\nLeft to right is the player's whole journey."
+    },
+    {
+      "id": "sound-note",
+      "x": 940,
+      "y": -280,
+      "w": 420,
+      "page": "page-1",
+      "text": "3D lives in the real transforms: the compass ring is tilted on a rotateX plane, this card physically flips on its Y axis, the wax seal splits into two halves.\n\nHit the replay button to see the whole unlock beat again."
+    },
+    {
+      "id": "command",
+      "x": 0,
+      "y": -300,
+      "w": 660,
+      "page": "page-2",
+      "text": "COMMAND — the organiser's side\n\nThe hunt graph is a literal corkboard: index cards on pins, red string for edges, a gate card where the branch opens. Click any card to load it into the editor on the right.\n\nRace Control is the war room — the map is a chart table tilted in 3D, with live crew blips on it. Try the pause button.\n\nNames, crews and clue text are sample copy, not real event data."
+    }
+  ],
+  "launch": { "view": "canvas", "page": "page-1" }
+}

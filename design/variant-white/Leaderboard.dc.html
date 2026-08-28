@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #F6F6F4; }
+    a { color: #4B3BFF; }
+    a:hover { color: #2E1FD6; }
+    .row { transition: background 150ms ease, transform 150ms cubic-bezier(0.3, 1.3, 0.5, 1); cursor: pointer; }
+    .row:active { transform: scale(0.99); }
+    .live { animation: live 1.8s ease-in-out infinite; }
+    @keyframes live {
+      0% { transform: scale(0.8); opacity: 0.4; }
+      50% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0.8); opacity: 0.4; }
+    }
+    .drop { animation: drop 320ms cubic-bezier(0.2, 1.2, 0.4, 1) both; }
+    @keyframes drop {
+      0% { opacity: 0; transform: translateY(-6px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .push { transition: transform 110ms cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 110ms ease; }
+    .push:active { transform: translateY(5px); box-shadow: 0 0 0 #2E1FD6; }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #FFFFFF; font-family: 'Space Grotesk', system-ui, sans-serif; color: #0B0B0C; display: flex; flex-direction: column;">
+
+  <div style="position: absolute; right: -100px; top: -60px; width: 240px; height: 240px; border-radius: 50%; background: #FFC400; opacity: 0.09; pointer-events: none;"></div>
+
+  <div style="position: relative; padding: 24px 22px 0;">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #A0A0A8;">MONSOON RECKONING</span>
+      <span style="display: flex; align-items: center; gap: 7px; padding: 5px 11px 6px; border-radius: 999px; background: #F1FBF6;">
+        <span class="live" style="width: 6px; height: 6px; border-radius: 50%; background: #00C97A;"></span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #00885A;">LIVE</span>
+      </span>
+    </div>
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 14px;">
+      <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 42px; line-height: 0.95; letter-spacing: -0.045em;">Standings</span>
+      <span onClick="{{ refresh }}" style="padding-bottom: 5px; font-family: 'Space Mono', monospace; font-size: 11px; color: #4B3BFF; cursor: pointer;">REFRESH</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; margin-top: 14px; padding-bottom: 14px; border-bottom: 1.5px solid #F0F0EE;">
+      <span style="font-size: 13px; color: #6B6B72;">12 crews</span>
+      <span style="width: 4px; height: 4px; border-radius: 50%; background: #D8D8DC;"></span>
+      <span style="font-size: 13px; color: #6B6B72;">41:18 left</span>
+      <span style="width: 4px; height: 4px; border-radius: 50%; background: #D8D8DC;"></span>
+      <span style="font-size: 13px; color: #6B6B72;">7 clues</span>
+    </div>
+  </div>
+
+  <div style="position: relative; flex-grow: 1; display: flex; flex-direction: column; padding: 0 14px;">
+    <sc-for list="{{ crews }}" as="c" hint-placeholder-count="6">
+      <div class="row" onClick="{{ c.tap }}" style="display: flex; flex-direction: column; padding: 0 8px; border-radius: 18px; background: {{ c.bg }};">
+        <div style="display: flex; align-items: center; gap: 12px; height: 76px;">
+          <span style="width: 34px; flex-shrink: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 26px; line-height: 1; letter-spacing: -0.05em; color: {{ c.rankInk }};">{{ c.rank }}</span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: {{ c.hue }}; flex-shrink: 0;"></span>
+          <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px;">
+            <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 17px; line-height: 1.1; letter-spacing: -0.022em; color: {{ c.nameInk }};">{{ c.name }}</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: #A0A0A8;">{{ c.sub }}</span>
+          </div>
+          <span style="flex-shrink: 0; padding: 4px 9px 5px; border-radius: 999px; background: {{ c.chipBg }}; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: {{ c.chipInk }};">{{ c.move }}</span>
+          <span style="flex-shrink: 0; min-width: 54px; text-align: right; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.035em; color: {{ c.nameInk }};">{{ c.score }}</span>
+        </div>
+        <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+          <div class="drop" style="padding: 0 0 14px 58px;">
+            <span style="font-size: 13px; color: #6B6B72;">{{ c.detail }}</span>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="position: relative; margin: 0 18px 24px; padding: 18px 18px 19px; border-radius: 26px; background: #4B3BFF; box-shadow: 0 14px 30px rgba(75,59,255,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #BFB8FF;">YOU ARE 4TH</span>
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 24px; line-height: 1; letter-spacing: -0.035em; color: #FFFFFF;">The Salted Crew</span>
+        <span style="font-size: 13px; color: #CFC9FF; margin-top: 2px;">80 points off the podium</span>
+      </div>
+      <div class="push" onClick="{{ nudge }}" style="display: flex; align-items: center; justify-content: center; width: 54px; height: 54px; flex-shrink: 0; border-radius: 50%; background: #FFFFFF; box-shadow: 0 5px 0 #D9D4FF; cursor: pointer;">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#4B3BFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 19V6"></path>
+          <path d="M6 12l6-6 6 6"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"$preview":{"width":390,"height":844}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.18, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.04);
+  },
+  noise: function (dur, freq, q, vol) {
+    var c = this.ac();
+    if (!c) { return; }
+    var n = Math.floor(c.sampleRate * dur);
+    var b = c.createBuffer(1, n, c.sampleRate);
+    var d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) { d[i] = (Math.random() * 2 - 1) * (1 - i / n); }
+    var s = c.createBufferSource();
+    s.buffer = b;
+    var f = c.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = freq;
+    f.Q.value = q || 1;
+    var g = c.createGain();
+    g.gain.value = vol || 0.14;
+    s.connect(f);
+    f.connect(g);
+    g.connect(c.destination);
+    s.start();
+  },
+  tap: function () { this.tone(880, 0.05, 'triangle', 0.1, 1180); },
+  swish: function () { this.noise(0.22, 2600, 0.7, 0.09); },
+  pop: function () { this.tone(520, 0.1, 'sine', 0.2, 940); }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: null };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  renderVals() {
+    var self = this;
+    var defs = [
+      { id: 'a', rank: '01', name: 'Cartographers Anon.', sub: '5 CLUES · NO HINTS', score: 1580, move: '—', dir: 0, hue: '#FF4B3B', detail: 'Took the water tower 3 minutes ago.' },
+      { id: 'b', rank: '02', name: 'The Compass Rose', sub: '5 CLUES · 1 HINT', score: 1420, move: '+2', dir: 1, hue: '#00C97A', detail: 'Cleared the library steps 6 minutes ago.' },
+      { id: 'c', rank: '03', name: 'Dead Reckoning', sub: '4 CLUES · NO HINTS', score: 1320, move: '+1', dir: 1, hue: '#FFC400', detail: 'Behind the workshop, 2 minutes ago.' },
+      { id: 'd', rank: '04', name: 'The Salted Crew', sub: '4 CLUES · 2 HINTS', score: 1240, move: '-1', dir: -1, hue: '#4B3BFF', detail: 'That is you. Last seen at the iron bird.', mine: true },
+      { id: 'e', rank: '05', name: 'Landlubbers United', sub: '3 CLUES · 3 HINTS', score: 940, move: '—', dir: 0, hue: '#C88AD8', detail: 'At the canteen gate, 11 minutes ago.' },
+      { id: 'f', rank: '06', name: 'Off The Chart', sub: '3 CLUES · 1 HINT', score: 880, move: '+3', dir: 1, hue: '#00B8D9', detail: 'Sundial, 4 minutes ago. Climbing fast.' }
+    ];
+    return {
+      crews: defs.map(function (d) {
+        var on = self.state.open === d.id;
+        return {
+          rank: d.rank,
+          name: d.name,
+          sub: d.sub,
+          score: d.score,
+          move: d.move,
+          hue: d.hue,
+          open: on,
+          detail: d.detail,
+          bg: on ? '#F6F6F4' : (d.mine ? '#F4F3FF' : 'transparent'),
+          rankInk: d.rank === '01' ? '#FF4B3B' : (d.rank === '02' ? '#00C97A' : (d.rank === '03' ? '#FFC400' : '#D8D8DC')),
+          nameInk: d.mine ? '#4B3BFF' : '#0B0B0C',
+          chipBg: d.dir === 1 ? '#F1FBF6' : (d.dir === -1 ? '#FFF2F0' : '#F6F6F4'),
+          chipInk: d.dir === 1 ? '#00885A' : (d.dir === -1 ? '#D62E1F' : '#A0A0A8'),
+          tap: function () {
+            self.play('tap');
+            self.setState({ open: self.state.open === d.id ? null : d.id });
+          }
+        };
+      }),
+      refresh: function () { self.play('swish'); self.setState({ open: null }); },
+      nudge: function () { self.play('pop'); }
+    };
+  }
+}
+</script>
+</body>
+</html>

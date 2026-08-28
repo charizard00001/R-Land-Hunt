@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bitter:ital,wght@0,400;0,600;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #cfc0a0; }
+    a { color: #b8332a; }
+    a:hover { color: #7d1c16; }
+    .grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.5; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    }
+    .ink { stroke-dasharray: 6 7; animation: draw 3.4s linear infinite; }
+    @keyframes draw {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -78; }
+    }
+    .toast { animation: toast 400ms cubic-bezier(0.16, 1.8, 0.36, 1) both; }
+    @keyframes toast {
+      0% { opacity: 0; transform: translateY(14px) scale(0.88); }
+      65% { opacity: 1; transform: translateY(0) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .push { transition: transform 120ms cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 120ms ease; }
+    .push:active { transform: translateY(6px); box-shadow: 0 0 0 #5c400f; }
+    .wobble { animation: wobble 3.6s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+    @keyframes wobble {
+      0% { transform: rotate(6deg) scale(1); }
+      50% { transform: rotate(10deg) scale(1.05); }
+      100% { transform: rotate(6deg) scale(1); }
+    }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: radial-gradient(120% 70% at 50% 6%, #f4e9cc 0%, #e0d1ad 48%, #c5b48e 100%); font-family: 'Bitter', Georgia, serif; color: #241a12; display: flex; flex-direction: column;">
+
+  <div style="position: absolute; inset: 14px; border: 2px solid rgba(150,124,74,0.5); pointer-events: none;"></div>
+  <div style="position: absolute; inset: 20px; border: 4px double rgba(150,124,74,0.4); pointer-events: none;"></div>
+  <div class="grain"></div>
+
+  <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 40px 34px 0;">
+    <div style="display: inline-block; padding: 4px 12px 5px; background: #b8332a;">
+      <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.28em; color: #fbeeda;">MONSOON RECKONING</span>
+    </div>
+    <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 36px; letter-spacing: -0.025em; line-height: 1.02; text-align: center;">THE HUNT<br>IS ENDED</div>
+    <div style="font-family: 'Bitter', Georgia, serif; font-style: italic; font-weight: 500; font-size: 17px; color: #7a6749;">The Salted Crew came home</div>
+  </div>
+
+  <div style="position: relative; display: flex; align-items: baseline; justify-content: center; gap: 10px; padding: 14px 0 2px;">
+    <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 84px; line-height: 0.82; color: #b8332a; text-shadow: 0 3px 0 rgba(255,248,224,0.5);">3rd</div>
+    <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 10px;">
+      <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; color: #7a6749;">OF 12 CREWS</span>
+    </div>
+  </div>
+
+  <div class="wobble" style="position: absolute; right: 26px; top: 176px; padding: 7px 12px 8px; background: #241a12; box-shadow: 0 4px 0 #0d0906;">
+    <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: #e0b25c;">BEST YET</span>
+  </div>
+
+  <div style="position: relative; margin: 8px 24px 0; height: 190px; background: linear-gradient(#ece0bf, #dbcaa4); border: 2px solid #a8946c; box-shadow: inset 0 0 24px rgba(150,120,70,0.22);">
+    <svg viewBox="0 0 338 190" width="100%" height="190" style="display: block;" aria-hidden="true">
+      <g stroke="rgba(120,100,66,0.3)" stroke-width="1" fill="none">
+        <path d="M0 40 H338 M0 88 H338 M0 136 H338 M64 0 V190 M148 0 V190 M232 0 V190"></path>
+      </g>
+      <path class="ink" d="M46 150 C 84 126, 96 90, 138 82 S 196 102, 214 70 S 250 32, 290 44" fill="none" stroke="#b8332a" stroke-width="3.2" stroke-linecap="round"></path>
+      <g stroke="#241a12" stroke-width="3.2" stroke-linecap="round">
+        <path d="M40 144 l12 12 M52 144 l-12 12"></path>
+        <path d="M132 76 l12 12 M144 76 l-12 12"></path>
+        <path d="M208 64 l12 12 M220 64 l-12 12"></path>
+      </g>
+      <circle cx="290" cy="44" r="11" fill="#2f5d3a"></circle>
+      <path d="M285 44 l4 4 7-8" fill="none" stroke="#eaf6ec" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <div style="position: absolute; left: 12px; bottom: 8px; font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.16em; color: #7a6749;">7 MARKS &middot; 4.2 KM WALKED</div>
+  </div>
+
+  <div style="position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin: 14px 24px 0; background: #a8946c; border: 2px solid #a8946c;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 13px 6px; background: #ece0bf;">
+      <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 22px; line-height: 1;">58:04</span>
+      <span style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.14em; color: #7a6749;">AFOOT</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 13px 6px; background: #ece0bf;">
+      <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 22px; line-height: 1; color: #b8332a;">2</span>
+      <span style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.14em; color: #7a6749;">HINTS TAKEN</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 13px 6px; background: #ece0bf;">
+      <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 22px; line-height: 1;">1840</span>
+      <span style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.14em; color: #7a6749;">SPOILS</span>
+    </div>
+  </div>
+
+  <div style="position: relative; display: flex; align-items: flex-start; justify-content: center; gap: 5px; margin-top: 16px; height: 104px;">
+    <div style="width: 84px; padding: 6px 6px 18px; background: #faf3e1; border: 1.5px solid #a8946c; transform: rotate(-4deg); box-shadow: 0 4px 0 #97815a, 0 8px 12px rgba(50,34,16,0.24);">
+      <div style="height: 60px; background: linear-gradient(150deg, #7d8c76, #4e5a4a);"></div>
+      <div style="font-family: 'Courier Prime', monospace; font-size: 9px; color: #6b5738; text-align: center; margin-top: 4px;">MARK TWO</div>
+    </div>
+    <div style="width: 84px; padding: 6px 6px 18px; background: #faf3e1; border: 1.5px solid #a8946c; transform: rotate(2.5deg); box-shadow: 0 4px 0 #97815a, 0 8px 12px rgba(50,34,16,0.24);">
+      <div style="height: 60px; background: linear-gradient(150deg, #d8a469, #96683a);"></div>
+      <div style="font-family: 'Courier Prime', monospace; font-size: 9px; color: #6b5738; text-align: center; margin-top: 4px;">THE PLAQUE</div>
+    </div>
+    <div style="width: 84px; padding: 6px 6px 18px; background: #faf3e1; border: 1.5px solid #a8946c; transform: rotate(-1.5deg); box-shadow: 0 4px 0 #97815a, 0 8px 12px rgba(50,34,16,0.24);">
+      <div style="height: 60px; background: linear-gradient(150deg, #9a86b4, #4d4459);"></div>
+      <div style="font-family: 'Courier Prime', monospace; font-size: 9px; color: #6b5738; text-align: center; margin-top: 4px;">ALL OF US</div>
+    </div>
+  </div>
+
+  <sc-if value="{{ copied }}" hint-placeholder-val="{{ false }}">
+    <div class="toast" style="position: absolute; left: 50%; bottom: 118px; margin-left: -108px; width: 216px; padding: 11px 0 12px; text-align: center; background: #241708; border: 2px solid #120c05; box-shadow: 0 5px 0 #0d0906;">
+      <span style="font-family: 'Courier Prime', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: #e0b25c;">SEALED &middot; READY TO SHARE</span>
+    </div>
+  </sc-if>
+
+  <div style="position: relative; margin-top: auto; padding: 0 24px 30px;">
+    <div class="push" onClick="{{ share }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 70px; background: linear-gradient(#e0b25c, #a67c2c); border: 2px solid #64460f; border-radius: 4px; box-shadow: inset 0 2px 0 rgba(255,248,220,0.6), 0 6px 0 #5c400f, 0 12px 20px rgba(40,26,10,0.38); cursor: pointer;">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2b1c06" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="18" cy="5" r="2.6"></circle>
+        <circle cx="6" cy="12" r="2.6"></circle>
+        <circle cx="18" cy="19" r="2.6"></circle>
+        <path d="M8.4 10.8l7.2-4.2M8.4 13.2l7.2 4.2"></path>
+      </svg>
+      <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 23px; letter-spacing: -0.01em; color: #2b1c06;">CARRY THIS HOME</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"$preview":{"width":390,"height":844}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.03);
+  },
+  noise: function (dur, freq, q, vol) {
+    var c = this.ac();
+    if (!c) { return; }
+    var n = Math.floor(c.sampleRate * dur);
+    var b = c.createBuffer(1, n, c.sampleRate);
+    var d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) { d[i] = (Math.random() * 2 - 1) * (1 - i / n); }
+    var s = c.createBufferSource();
+    s.buffer = b;
+    var f = c.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = freq;
+    f.Q.value = q || 1;
+    var g = c.createGain();
+    g.gain.value = vol || 0.2;
+    s.connect(f);
+    f.connect(g);
+    g.connect(c.destination);
+    s.start();
+  },
+  stamp: function () { this.tone(72, 0.26, 'triangle', 0.44, 38); this.noise(0.08, 1700, 1.1, 0.26); },
+  chime: function () {
+    var self = this;
+    [659.25, 830.61, 1046.5].forEach(function (f, i) {
+      self.tone(f, 0.44, 'triangle', 0.16, null, i * 0.085);
+    });
+  }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { copied: false };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    var self = this;
+    return {
+      copied: this.state.copied,
+      share: function () {
+        self.play('stamp');
+        setTimeout(function () { self.play('chime'); }, 150);
+        self.setState({ copied: true });
+        clearTimeout(self._t);
+        self._t = setTimeout(function () { self.setState({ copied: false }); }, 2400);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

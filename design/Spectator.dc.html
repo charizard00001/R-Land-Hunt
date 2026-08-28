@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bitter:ital,wght@0,400;0,600;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #0a0f13; }
+    a { color: #e0b25c; }
+    a:hover { color: #f2cd85; }
+    .grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.22; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    }
+    .rayspin { animation: rayspin 46s linear infinite; }
+    @keyframes rayspin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .live { animation: live 1.5s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+    @keyframes live {
+      0% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.15); }
+      100% { opacity: 0.3; transform: scale(0.8); }
+    }
+    .ticker { animation: ticker 34s linear infinite; }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .row { transition: background 380ms ease, transform 420ms cubic-bezier(0.28, 1.5, 0.45, 1); }
+    .grow { animation: grow 2.2s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate; transform-origin: bottom; }
+    @keyframes grow {
+      0% { transform: scaleY(0.9); }
+      100% { transform: scaleY(1); }
+    }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 1440px; height: 810px; overflow: hidden; display: flex; flex-direction: column; font-family: 'Bitter', Georgia, serif; color: #f0e6cf; background: radial-gradient(110% 80% at 50% 0%, #1d3745 0%, #101f28 48%, #070d11 100%);">
+
+  <div class="rayspin" style="position: absolute; left: 50%; top: 120px; width: 1600px; height: 1600px; margin: -800px 0 0 -800px; opacity: 0.06; pointer-events: none; background: repeating-conic-gradient(from 0deg, #e0b25c 0deg 3deg, transparent 3deg 14deg);"></div>
+  <div class="grain"></div>
+
+  <div style="position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; padding: 38px 56px 24px; border-bottom: 3px solid #2d4453;">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="display: inline-flex; align-items: center; gap: 12px; align-self: flex-start; padding: 6px 14px 7px; background: #b8332a;">
+        <span class="live" style="width: 10px; height: 10px; border-radius: 50%; background: #fff3ef;"></span>
+        <span style="font-family: 'Courier Prime', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.3em; color: #fff3ef;">LIVE FROM THE CAMPUS</span>
+      </div>
+      <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 66px; line-height: 0.92; letter-spacing: -0.03em; color: #f6ecd6;">MONSOON RECKONING</div>
+    </div>
+    <div style="display: flex; align-items: flex-end; gap: 44px;">
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 3px;">
+        <span style="font-family: 'Courier Prime', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.26em; color: #7f9aab;">CREWS AFLOAT</span>
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 50px; line-height: 1; color: #f6ecd6;">12</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 3px;">
+        <span style="font-family: 'Courier Prime', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.26em; color: #7f9aab;">TIME REMAINING</span>
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 62px; line-height: 1; color: #e0b25c;">0:41:18</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: relative; display: flex; flex-grow: 1; min-height: 0;">
+
+    <div style="flex-grow: 1; display: flex; flex-direction: column; padding: 22px 40px 18px 56px;">
+      <sc-for list="{{ crews }}" as="c" hint-placeholder-count="5">
+        <div class="row" style="display: flex; align-items: center; gap: 26px; padding: 14px 20px; background: {{ c.bg }}; border-bottom: 1px solid #1e2f3a; transform: {{ c.lift }};">
+          <div style="width: 64px; height: 64px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: {{ c.medal }}; border: 3px solid {{ c.medalEdge }}; box-shadow: {{ c.medalShadow }};">
+            <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 26px; color: {{ c.rankInk }};">{{ c.rank }}</span>
+          </div>
+          <span style="width: 15px; height: 15px; border-radius: 50%; background: {{ c.hue }}; flex-shrink: 0; box-shadow: 0 0 15px {{ c.hue }};"></span>
+          <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 32px; line-height: 1; letter-spacing: -0.022em; color: #f6ecd6;">{{ c.name }}</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.16em; color: #7f9aab;">{{ c.detail }}</span>
+          </div>
+          <span style="flex-shrink: 0; padding: 5px 12px 6px; background: {{ c.moveBg }}; font-family: 'Courier Prime', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: {{ c.moveInk }};">{{ c.move }}</span>
+          <span style="flex-shrink: 0; min-width: 122px; text-align: right; font-family: 'Alfa Slab One', Georgia, serif; font-size: 46px; line-height: 1; color: #f6ecd6;">{{ c.score }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="width: 424px; flex-shrink: 0; display: flex; flex-direction: column; gap: 16px; padding: 22px 56px 18px 0;">
+
+      <div style="display: flex; flex-direction: column; gap: 13px; padding: 24px 26px 26px; background: rgba(224,178,92,0.11); border: 3px solid #8a6a2c;">
+        <span style="font-family: 'Courier Prime', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; color: #e0b25c;">JUST NOW</span>
+        <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 32px; line-height: 1.04; letter-spacing: -0.022em; color: #f6ecd6;">CARTOGRAPHERS ANON.</div>
+        <div style="font-family: 'Bitter', Georgia, serif; font-weight: 600; font-size: 20px; line-height: 1.36; color: #c4d4de;">took The Water Tower first, and the north branch with it.</div>
+        <div style="display: flex; align-items: baseline; gap: 12px; margin-top: 4px;">
+          <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 46px; line-height: 1; color: #8fd6a0;">+140</span>
+          <span style="padding: 5px 11px 6px; background: #b8332a; font-family: 'Courier Prime', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #fff3ef;">FIRST BLOOD</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; padding: 20px 24px 22px; border: 3px solid #2d4453;">
+        <span style="font-family: 'Courier Prime', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.3em; color: #7f9aab;">MARKS CLAIMED</span>
+        <div style="display: flex; align-items: flex-end; gap: 6px; height: 94px;">
+          <div class="grow" style="flex-grow: 1; height: 34%; background: #3c5a68;"></div>
+          <div class="grow" style="flex-grow: 1; height: 58%; background: #3c5a68;"></div>
+          <div class="grow" style="flex-grow: 1; height: 46%; background: #3c5a68;"></div>
+          <div class="grow" style="flex-grow: 1; height: 79%; background: #e0b25c;"></div>
+          <div class="grow" style="flex-grow: 1; height: 100%; background: #e0b25c;"></div>
+          <div class="grow" style="flex-grow: 1; height: 41%; background: #3c5a68;"></div>
+          <div class="grow" style="flex-grow: 1; height: 22%; background: #3c5a68;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.12em; color: #6f8797;">
+          <span>MARK I</span>
+          <span>MARK VII</span>
+        </div>
+        <div style="font-family: 'Bitter', Georgia, serif; font-style: italic; font-weight: 500; font-size: 18px; color: #e0b25c;">the sundial is eating everyone alive</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div style="position: relative; display: flex; align-items: center; height: 64px; flex-shrink: 0; overflow: hidden; border-top: 3px solid #2d4453; background: rgba(7,13,17,0.75);">
+    <span style="flex-shrink: 0; padding: 0 24px; font-family: 'Courier Prime', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.28em; color: #e0b25c; border-right: 2px solid #2d4453; line-height: 64px;">THE LOG</span>
+    <div style="flex-grow: 1; overflow: hidden;">
+      <div class="ticker" style="display: flex; gap: 54px; white-space: nowrap; font-family: 'Bitter', Georgia, serif; font-size: 20px; color: #9db4c2; line-height: 64px;">
+        <span>The Compass Rose bought plain words at The Sundial &mdash; <strong style="color: #e8786e;">60</strong></span>
+        <span>Dead Reckoning claimed <strong style="color: #e0b25c;">The Iron Bird</strong></span>
+        <span>Off The Chart has been at the same corner for fourteen minutes</span>
+        <span>The Salted Crew slipped to fourth</span>
+        <span>The Compass Rose bought plain words at The Sundial &mdash; <strong style="color: #e8786e;">60</strong></span>
+        <span>Dead Reckoning claimed <strong style="color: #e0b25c;">The Iron Bird</strong></span>
+        <span>Off The Chart has been at the same corner for fourteen minutes</span>
+        <span>The Salted Crew slipped to fourth</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":810}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { hi: 0 };
+  }
+  componentDidMount() {
+    var self = this;
+    this._iv = setInterval(function () {
+      self.setState({ hi: (self.state.hi + 1) % 5 });
+    }, 3200);
+  }
+  componentWillUnmount() { clearInterval(this._iv); }
+  renderVals() {
+    var self = this;
+    var defs = [
+      { rank: 'I', name: 'CARTOGRAPHERS ANON.', detail: '5 MARKS · NO HINTS · NORTH BRANCH', score: 1580, move: 'HELD', up: null, hue: '#e8786e' },
+      { rank: 'II', name: 'THE COMPASS ROSE', detail: '5 MARKS · 1 HINT · SOUTH BRANCH', score: 1420, move: 'UP 2', up: true, hue: '#8fd6a0' },
+      { rank: 'III', name: 'DEAD RECKONING', detail: '4 MARKS · NO HINTS · NORTH BRANCH', score: 1320, move: 'UP 1', up: true, hue: '#e0be5a' },
+      { rank: 'IV', name: 'THE SALTED CREW', detail: '4 MARKS · 2 HINTS · SOUTH BRANCH', score: 1240, move: 'DOWN 1', up: false, hue: '#7ab0d8' },
+      { rank: 'V', name: 'LANDLUBBERS UNITED', detail: '3 MARKS · 3 HINTS · UNDER REVIEW', score: 940, move: 'HELD', up: null, hue: '#c88ad8' }
+    ];
+    return {
+      crews: defs.map(function (d, i) {
+        var on = self.state.hi === i;
+        var top3 = d.rank === 'I' || d.rank === 'II' || d.rank === 'III';
+        return {
+          rank: d.rank,
+          name: d.name,
+          detail: d.detail,
+          score: d.score,
+          move: d.move,
+          hue: d.hue,
+          bg: on ? 'rgba(224,178,92,0.12)' : 'transparent',
+          lift: on ? 'translateX(10px)' : 'translateX(0)',
+          moveInk: d.up === true ? '#eaf6ec' : (d.up === false ? '#fff3ef' : '#7f9aab'),
+          moveBg: d.up === true ? '#2f5d3a' : (d.up === false ? '#b8332a' : 'rgba(127,154,171,0.16)'),
+          medal: d.rank === 'I' ? 'linear-gradient(#f2cd7c, #b8873a)' : (d.rank === 'II' ? 'linear-gradient(#e2dcce, #a9a294)' : (d.rank === 'III' ? 'linear-gradient(#dcac7e, #a5734a)' : 'transparent')),
+          medalEdge: top3 ? '#f6ecd6' : '#2d4453',
+          medalShadow: top3 ? '0 5px 0 rgba(0,0,0,0.35)' : 'none',
+          rankInk: top3 ? '#241a12' : '#7f9aab'
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

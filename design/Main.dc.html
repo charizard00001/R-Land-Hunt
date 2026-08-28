@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bitter:ital,wght@0,400;0,600;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #cfc0a0; }
+    a { color: #b8332a; }
+    a:hover { color: #7d1c16; }
+    .grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.55; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.38'/%3E%3C/svg%3E");
+    }
+    .push { transition: transform 120ms cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 120ms ease; }
+    .push:active { transform: translateY(7px); box-shadow: 0 0 0 #6a120e, 0 2px 8px rgba(20,12,6,0.4); }
+    .lift { transition: transform 130ms cubic-bezier(0.3, 1.5, 0.5, 1); }
+    .lift:active { transform: scale(0.96) rotate(0.7deg); }
+    .needle { animation: sway 3.1s cubic-bezier(0.45, 0, 0.55, 1) infinite; transform-origin: 50% 78%; }
+    @keyframes sway {
+      0% { transform: rotate(-3.4deg); }
+      50% { transform: rotate(3.4deg); }
+      100% { transform: rotate(-3.4deg); }
+    }
+    .slam { animation: slam 520ms cubic-bezier(0.16, 1.9, 0.36, 1) both; }
+    @keyframes slam {
+      0% { transform: rotate(-13deg) scale(3.1); opacity: 0; }
+      48% { transform: rotate(-13deg) scale(0.88); opacity: 1; }
+      68% { transform: rotate(-11deg) scale(1.06); }
+      100% { transform: rotate(-13deg) scale(1); opacity: 1; }
+    }
+    .shake { animation: shake 420ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      15% { transform: translateX(-7px); }
+      30% { transform: translateX(6px); }
+      45% { transform: translateX(-4px); }
+      60% { transform: translateX(3px); }
+      80% { transform: translateX(-1px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</helmet>
+
+<div class="{{ shakeCls }}" style="position: relative; width: 390px; height: 844px; overflow: hidden; background: radial-gradient(120% 80% at 20% 8%, #f0e4c6 0%, #ddcfae 42%, #c5b58e 100%); font-family: 'Bitter', Georgia, serif; color: #241a12; display: flex; flex-direction: column;">
+
+  <div style="position: absolute; left: -60px; top: 330px; width: 420px; height: 420px; opacity: 0.1; pointer-events: none;">
+    <svg viewBox="0 0 200 200" width="420" height="420" aria-hidden="true">
+      <g fill="none" stroke="#241a12" stroke-width="0.7">
+        <circle cx="100" cy="100" r="92"></circle>
+        <circle cx="100" cy="100" r="72"></circle>
+        <circle cx="100" cy="100" r="40"></circle>
+      </g>
+      <path d="M100 8 L112 88 L100 100 L88 88 Z" fill="#241a12"></path>
+      <path d="M100 192 L112 112 L100 100 L88 112 Z" fill="#241a12"></path>
+      <path d="M8 100 L88 88 L100 100 L88 112 Z" fill="#241a12"></path>
+      <path d="M192 100 L112 88 L100 100 L112 112 Z" fill="#241a12"></path>
+    </svg>
+  </div>
+
+  <div style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; opacity: 0.16; pointer-events: none;">
+    <svg viewBox="0 0 390 844" width="390" height="844" aria-hidden="true" fill="none" stroke="#5d4a30" stroke-width="1">
+      <path d="M-20 210 C 60 190, 120 250, 200 226 S 340 190, 420 232"></path>
+      <path d="M-20 236 C 70 216, 130 274, 206 252 S 344 216, 420 258"></path>
+      <path d="M-20 706 C 90 680, 150 742, 240 716 S 350 682, 420 724"></path>
+    </svg>
+  </div>
+
+  <div class="grain"></div>
+
+  <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-start; padding: 22px 20px 0; gap: 12px;">
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 23px; letter-spacing: -0.012em; color: #241a12; line-height: 1;">Monsoon Reckoning</div>
+      <div style="font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.17em; color: #7a6749;">LEG 3 OF 7 &middot; THE SALTED CREW</div>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 6px 12px 8px; background: linear-gradient(#e0b25c, #a67c2c); border: 1.5px solid #64460f; border-radius: 3px; box-shadow: inset 0 1.5px 0 rgba(255,246,214,0.7), 0 3px 0 #6f4f18;">
+      <div style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.2em; color: #4a3208;">SPOILS</div>
+      <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 24px; line-height: 0.92; color: #2b1c06;">1240</div>
+    </div>
+  </div>
+
+  <div style="position: relative; display: flex; align-items: center; gap: 10px; padding: 15px 20px 0;">
+    <div style="height: 2px; flex-grow: 1; background: repeating-linear-gradient(90deg, #8a7351 0 7px, transparent 7px 12px);"></div>
+    <div style="font-family: 'Courier Prime', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; color: #b8332a;">0:41:18 REMAINS</div>
+    <div style="height: 2px; flex-grow: 1; background: repeating-linear-gradient(90deg, #8a7351 0 7px, transparent 7px 12px);"></div>
+  </div>
+
+  <div style="position: relative; margin: 16px 18px 0; padding: 18px 22px 22px; background: linear-gradient(#f6ecd0, #e6d8b4); border: 1.5px solid #a8946c; transform: rotate(-1.1deg); box-shadow: 0 12px 20px rgba(45,30,14,0.26), inset 0 0 30px rgba(150,120,70,0.16); clip-path: polygon(0 2%, 3% 0, 97% 1%, 100% 3%, 99% 97%, 96% 100%, 4% 99%, 1% 96%);">
+    <div style="position: absolute; left: 50%; top: -11px; width: 74px; height: 22px; margin-left: -37px; background: rgba(226,208,164,0.82); border-left: 1px solid rgba(160,140,100,0.5); border-right: 1px solid rgba(160,140,100,0.5); transform: rotate(1.6deg); box-shadow: 0 1px 3px rgba(60,40,20,0.18);"></div>
+    <div style="display: inline-block; padding: 4px 10px 5px; background: #b8332a; margin-bottom: 12px;">
+      <span style="font-family: 'Courier Prime', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: #fbeeda;">THE THIRD MARK</span>
+    </div>
+    <div style="font-family: 'Bitter', Georgia, serif; font-weight: 600; font-size: 21px; line-height: 1.36; color: #241a12; text-wrap: pretty;">Where the iron bird has kept her watch above the quadrangle since forty-seven, count the steps beneath her wing.</div>
+  </div>
+
+  <div style="position: relative; flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 11px; margin-top: 2px;">
+    <div style="position: relative; width: 214px; height: 214px; perspective: 720px;">
+      <div style="position: absolute; inset: 0; transform: rotateX(24deg); transform-style: preserve-3d;">
+        <div style="position: absolute; inset: 8px; border-radius: 50%; background: radial-gradient(circle at 34% 26%, #f4eaca, #d3c096 58%, #b09a6e); box-shadow: 0 18px 26px rgba(40,26,12,0.38), inset 0 0 22px rgba(120,92,48,0.35);"></div>
+        <svg viewBox="0 0 214 214" width="214" height="214" style="position: absolute; inset: 0;" aria-hidden="true">
+          <circle cx="107" cy="107" r="95" fill="none" stroke="#6a4e18" stroke-width="8"></circle>
+          <circle cx="107" cy="107" r="95" fill="none" stroke="#deae5e" stroke-width="5"></circle>
+          <circle cx="107" cy="107" r="84" fill="none" stroke="#6d5426" stroke-width="6" stroke-dasharray="2 12.65"></circle>
+          <circle cx="107" cy="107" r="84" fill="none" stroke="#6d5426" stroke-width="12" stroke-dasharray="3 128.9"></circle>
+        </svg>
+        <div class="needle" style="position: absolute; left: 50%; top: 26px; width: 2px; height: 88px; margin-left: -1px; transform: rotate(72deg);">
+          <svg viewBox="0 0 20 100" width="20" height="100" style="position: absolute; left: -9px; top: 0;" aria-hidden="true">
+            <path d="M10 0 L18 74 L10 82 L2 74 Z" fill="#b8332a"></path>
+            <path d="M10 82 L15 96 L10 100 L5 96 Z" fill="#3a2c18"></path>
+          </svg>
+        </div>
+      </div>
+      <div style="position: absolute; left: 0; right: 0; top: 66px; display: flex; flex-direction: column; align-items: center; gap: 2px;">
+        <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 62px; line-height: 0.84; color: #241a12; text-shadow: 0 2px 0 rgba(255,248,224,0.7);">142</div>
+        <div style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.34em; color: #6b5738;">METRES OFF</div>
+      </div>
+    </div>
+    <div style="font-family: 'Courier Prime', monospace; font-size: 11px; letter-spacing: 0.2em; color: #5d4a30;">BEARING 072&deg; &middot; EAST-NORTHEAST</div>
+  </div>
+
+  <sc-if value="{{ showStamp }}" hint-placeholder-val="{{ true }}">
+    <div class="slam" style="position: absolute; left: 50%; top: 424px; width: 300px; margin-left: -150px; padding: 15px 0 17px; text-align: center; border: 5px double #b8332a; color: #b8332a; background: rgba(246,236,208,0.5); box-shadow: 0 6px 18px rgba(120,30,24,0.28);">
+      <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 30px; letter-spacing: 0.01em; line-height: 1;">NOT HERE YET</div>
+      <div style="font-family: 'Courier Prime', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.24em; margin-top: 7px;">142 M &middot; KEEP WALKING</div>
+    </div>
+  </sc-if>
+
+  <div style="position: relative; display: flex; flex-direction: column; gap: 11px; padding: 0 18px 24px;">
+    <div class="lift" onClick="{{ rustle }}" style="align-self: center; display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 11px 18px; background: linear-gradient(#efe1be, #ddcca4); border: 2px solid #a8946c; transform: rotate(0.7deg); box-shadow: 0 3px 0 #97815a; cursor: pointer;">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#b8332a" stroke-width="2.1" stroke-linecap="round" aria-hidden="true">
+        <path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5.9 1.1.9 1.8v.4h5.4v-.4c0-.7.3-1.3.9-1.8A6 6 0 0 0 12 3Z"></path>
+        <path d="M10 20h4"></path>
+      </svg>
+      <span style="font-family: 'Courier Prime', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #3a2c1c;">CONSULT THE INFORMANT &middot; 3 LEFT</span>
+    </div>
+
+    <div class="push" onClick="{{ mark }}" style="position: relative; display: flex; align-items: center; justify-content: center; gap: 14px; min-height: 78px; padding: 0 18px; background: linear-gradient(#c8392e, #96231d); border: 2px solid #6a120e; border-radius: 4px; box-shadow: 0 7px 0 #6a120e, 0 13px 22px rgba(120,26,18,0.42); cursor: pointer;">
+      <div style="position: relative; width: 46px; height: 46px; flex-shrink: 0;">
+        <div style="position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 34% 28%, #f6d9a8, #d8a04a 56%, #9c7328); box-shadow: inset 0 2px 5px rgba(255,246,214,0.6), inset 0 -3px 7px rgba(70,44,10,0.5), 0 2px 5px rgba(0,0,0,0.35);"></div>
+        <svg viewBox="0 0 46 46" width="46" height="46" style="position: absolute; inset: 0;" aria-hidden="true">
+          <path d="M23 11 L26 20 L35 20 L28 26 L31 35 L23 29 L15 35 L18 26 L11 20 L20 20 Z" fill="none" stroke="rgba(90,58,12,0.65)" stroke-width="1.8" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 3px;">
+        <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 25px; letter-spacing: -0.01em; color: #fbeeda; line-height: 1;">MARK THIS SPOT</div>
+        <div style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.18em; color: #f0bfb8;">PRESS THE SEAL TO CLAIM</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"wax":{"editor":"color","default":"#b8332a","options":["#b8332a","#1b3a4b","#2f5d3a","#b8873a"],"section":"Feel"},"$preview":{"width":390,"height":844}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.03);
+  },
+  noise: function (dur, freq, q, vol) {
+    var c = this.ac();
+    if (!c) { return; }
+    var n = Math.floor(c.sampleRate * dur);
+    var b = c.createBuffer(1, n, c.sampleRate);
+    var d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) { d[i] = (Math.random() * 2 - 1) * (1 - i / n); }
+    var s = c.createBufferSource();
+    s.buffer = b;
+    var f = c.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = freq;
+    f.Q.value = q || 1;
+    var g = c.createGain();
+    g.gain.value = vol || 0.2;
+    s.connect(f);
+    f.connect(g);
+    g.connect(c.destination);
+    s.start();
+  },
+  thunk: function () { this.tone(118, 0.16, 'sine', 0.36, 56); this.noise(0.09, 900, 0.8, 0.17); },
+  stamp: function () { this.tone(72, 0.26, 'triangle', 0.46, 38); this.noise(0.08, 1700, 1.1, 0.28); },
+  paper: function () { this.noise(0.24, 2700, 0.6, 0.12); }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { showStamp: false, shake: false };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  componentWillUnmount() { clearTimeout(this._t); clearTimeout(this._s); }
+  renderVals() {
+    var self = this;
+    return {
+      showStamp: this.state.showStamp,
+      shakeCls: this.state.shake ? 'shake' : '',
+      mark: function () {
+        self.play('thunk');
+        setTimeout(function () { self.play('stamp'); }, 115);
+        self.setState({ showStamp: true, shake: true });
+        clearTimeout(self._s);
+        self._s = setTimeout(function () { self.setState({ shake: false }); }, 520);
+        clearTimeout(self._t);
+        self._t = setTimeout(function () { self.setState({ showStamp: false }); }, 2600);
+      },
+      rustle: function () { self.play('paper'); }
+    };
+  }
+}
+</script>
+</body>
+</html>

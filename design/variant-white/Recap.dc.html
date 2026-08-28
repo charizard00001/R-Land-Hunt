@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #F6F6F4; }
+    a { color: #4B3BFF; }
+    a:hover { color: #2E1FD6; }
+    .push { transition: transform 110ms cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 110ms ease; }
+    .push:active { transform: translateY(6px); box-shadow: 0 0 0 #2E1FD6; }
+    .trace { stroke-dasharray: 420; stroke-dashoffset: 420; animation: trace 2600ms cubic-bezier(0.3, 0.7, 0.3, 1) 300ms infinite; }
+    @keyframes trace {
+      0% { stroke-dashoffset: 420; }
+      45% { stroke-dashoffset: 0; }
+      92% { stroke-dashoffset: 0; opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+    .wobble { animation: wobble 4.4s ease-in-out infinite; }
+    @keyframes wobble {
+      0% { transform: rotate(6deg); }
+      50% { transform: rotate(10deg); }
+      100% { transform: rotate(6deg); }
+    }
+    .toast { animation: toast 380ms cubic-bezier(0.2, 1.5, 0.4, 1) both; }
+    @keyframes toast {
+      0% { opacity: 0; transform: translateY(12px) scale(0.94); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #FFFFFF; font-family: 'Space Grotesk', system-ui, sans-serif; color: #0B0B0C; display: flex; flex-direction: column;">
+
+  <div style="position: absolute; left: -80px; top: -70px; width: 260px; height: 260px; border-radius: 50%; background: #FFC400; opacity: 0.1; pointer-events: none;"></div>
+
+  <div style="position: relative; padding: 46px 22px 0;">
+    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #A0A0A8;">MONSOON RECKONING &middot; DONE</span>
+        <div style="display: flex; align-items: baseline; gap: 9px;">
+          <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 78px; line-height: 0.82; letter-spacing: -0.06em; color: #FFC400;">3rd</span>
+          <span style="font-family: 'Space Mono', monospace; font-size: 12px; color: #A0A0A8;">/ 12</span>
+        </div>
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 24px; line-height: 1.06; letter-spacing: -0.035em; margin-top: 4px;">The Salted Crew<br>made the podium.</span>
+      </div>
+      <div class="wobble" style="flex-shrink: 0; margin-top: 26px; padding: 9px 12px 10px; border-radius: 14px; background: #0B0B0C;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: #FFC400;">BEST YET</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: relative; margin: 24px 22px 0; border-radius: 26px; background: #F6F6F4; border: 1.5px solid #EDEDEA; overflow: hidden;">
+    <svg viewBox="0 0 342 186" width="100%" height="186" style="display: block;" aria-hidden="true">
+      <g stroke="#E4E4E0" stroke-width="1.5" fill="none">
+        <path d="M0 46 H342 M0 93 H342 M0 140 H342 M68 0 V186 M136 0 V186 M204 0 V186 M272 0 V186"></path>
+      </g>
+      <path class="trace" d="M42 150 C 84 124, 98 88, 140 80 S 198 100, 218 66 S 254 30, 296 44" fill="none" stroke="#4B3BFF" stroke-width="4" stroke-linecap="round"></path>
+      <g fill="#FFFFFF" stroke="#0B0B0C" stroke-width="2.5">
+        <circle cx="42" cy="150" r="6"></circle>
+        <circle cx="140" cy="80" r="6"></circle>
+        <circle cx="218" cy="66" r="6"></circle>
+      </g>
+      <circle cx="296" cy="44" r="10" fill="#00C97A"></circle>
+      <path d="M291 44 l4 4 7-8" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 16px 14px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #6B6B72;">7 CLUES</span>
+      <span style="width: 4px; height: 4px; border-radius: 50%; background: #D8D8DC;"></span>
+      <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #6B6B72;">4.2 KM ON FOOT</span>
+    </div>
+  </div>
+
+  <div style="position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 14px 22px 0;">
+    <div style="display: flex; flex-direction: column; gap: 3px; padding: 15px 14px 16px; border-radius: 20px; background: #F4F3FF;">
+      <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 26px; line-height: 1; letter-spacing: -0.045em; color: #4B3BFF;">58:04</span>
+      <span style="font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: #8A84C8;">ON THE CLOCK</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 3px; padding: 15px 14px 16px; border-radius: 20px; background: #FFF2F0;">
+      <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 26px; line-height: 1; letter-spacing: -0.045em; color: #FF4B3B;">2</span>
+      <span style="font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: #D69B93;">HINTS USED</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 3px; padding: 15px 14px 16px; border-radius: 20px; background: #F1FBF6;">
+      <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 26px; line-height: 1; letter-spacing: -0.045em; color: #00C97A;">1840</span>
+      <span style="font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: #7FC3A5;">FINAL SCORE</span>
+    </div>
+  </div>
+
+  <div style="position: relative; display: flex; gap: 8px; margin: 14px 22px 0;">
+    <div style="flex-grow: 1; height: 92px; border-radius: 18px; background: linear-gradient(140deg, #A8C8E8, #5E86AC);"></div>
+    <div style="flex-grow: 1; height: 92px; border-radius: 18px; background: linear-gradient(140deg, #F0C89A, #C08A4E);"></div>
+    <div style="flex-grow: 1; height: 92px; border-radius: 18px; background: linear-gradient(140deg, #C8B4E8, #8A6EC0);"></div>
+    <div style="width: 44px; height: 92px; flex-shrink: 0; border-radius: 18px; background: #F6F6F4; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 11px; color: #A0A0A8;">+9</div>
+  </div>
+
+  <sc-if value="{{ copied }}" hint-placeholder-val="{{ false }}">
+    <div class="toast" style="position: absolute; left: 50%; bottom: 112px; margin-left: -96px; width: 192px; padding: 12px 0 13px; text-align: center; border-radius: 999px; background: #0B0B0C;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #FFFFFF;">CARD COPIED</span>
+    </div>
+  </sc-if>
+
+  <div style="position: relative; flex-grow: 1;"></div>
+
+  <div style="position: relative; padding: 0 22px 28px;">
+    <div class="push" onClick="{{ share }}" style="display: flex; align-items: center; justify-content: center; gap: 11px; min-height: 68px; border-radius: 999px; background: #4B3BFF; box-shadow: 0 6px 0 #2E1FD6, 0 16px 30px rgba(75,59,255,0.32); cursor: pointer;">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="18" cy="5" r="2.6"></circle>
+        <circle cx="6" cy="12" r="2.6"></circle>
+        <circle cx="18" cy="19" r="2.6"></circle>
+        <path d="M8.4 10.8l7.2-4.2M8.4 13.2l7.2 4.2"></path>
+      </svg>
+      <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #FFFFFF;">SHARE THE RUN</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"$preview":{"width":390,"height":844}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.18, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.04);
+  },
+  pop: function () { this.tone(520, 0.1, 'sine', 0.2, 940); },
+  ding: function () {
+    var self = this;
+    [659.25, 987.77].forEach(function (f, i) {
+      self.tone(f, 0.36, 'triangle', 0.15, null, i * 0.09);
+    });
+  }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { copied: false };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    var self = this;
+    return {
+      copied: this.state.copied,
+      share: function () {
+        self.play('pop');
+        setTimeout(function () { self.play('ding'); }, 120);
+        self.setState({ copied: true });
+        clearTimeout(self._t);
+        self._t = setTimeout(function () { self.setState({ copied: false }); }, 2300);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

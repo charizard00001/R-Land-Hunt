@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #F6F6F4; }
+    a { color: #4B3BFF; }
+    a:hover { color: #2E1FD6; }
+    .crew { transition: background 140ms ease, border-color 140ms ease; cursor: pointer; }
+    .crew:hover { background: #FBFBFA; }
+    .blip { animation: blip 2.1s ease-in-out infinite; }
+    @keyframes blip {
+      0% { transform: scale(1); opacity: 0.55; }
+      50% { transform: scale(2.1); opacity: 0; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+    .live { animation: live 1.8s ease-in-out infinite; }
+    @keyframes live {
+      0% { transform: scale(0.8); opacity: 0.4; }
+      50% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0.8); opacity: 0.4; }
+    }
+    .ticker { animation: ticker 32s linear infinite; }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .push { transition: transform 110ms cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 110ms ease; }
+    .push:active { transform: translateY(4px); }
+    .chip { transition: background 130ms ease, transform 110ms ease; cursor: pointer; }
+    .chip:active { transform: scale(0.97); }
+    .flow { stroke-dasharray: 6 10; animation: flow 1.3s linear infinite; }
+    @keyframes flow {
+      0% { stroke-dashoffset: 32; }
+      100% { stroke-dashoffset: 0; }
+    }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; display: flex; flex-direction: column; font-family: 'Space Grotesk', system-ui, sans-serif; color: #0B0B0C; background: #FFFFFF;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 74px; flex-shrink: 0; padding: 0 22px; background: #FFFFFF; border-bottom: 1.5px solid #F0F0EE;">
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.035em;">Race Control</span>
+      <span style="width: 1.5px; height: 24px; background: #F0F0EE;"></span>
+      <span style="font-size: 15px; color: #6B6B72;">Monsoon Reckoning</span>
+      <span style="display: flex; align-items: center; gap: 7px; padding: 5px 11px 6px; border-radius: 999px; background: {{ liveBg }};">
+        <span class="live" style="width: 6px; height: 6px; border-radius: 50%; background: {{ liveDot }};"></span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: {{ liveInk }};">{{ liveLabel }}</span>
+      </span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 18px;">
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 1px;">
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 30px; line-height: 1; letter-spacing: -0.045em;">0:41:18</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: #A0A0A8;">SERVER CLOCK</span>
+      </div>
+      <div class="chip" onClick="{{ hail }}" style="display: flex; align-items: center; gap: 9px; padding: 12px 16px; border-radius: 999px; background: #F6F6F4;">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#6B6B72" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 10v4h4l5 4V6l-5 4H3Z"></path>
+          <path d="M16 9a4 4 0 0 1 0 6"></path>
+        </svg>
+        <span style="font-size: 13px; font-weight: 500; color: #6B6B72;">Message all</span>
+      </div>
+      <div class="push" onClick="{{ toggle }}" style="display: flex; align-items: center; gap: 9px; padding: 13px 20px; border-radius: 999px; background: {{ pauseBg }}; box-shadow: 0 4px 0 {{ pauseShadow }}; cursor: pointer;">
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 15px; letter-spacing: -0.015em; color: #FFFFFF;">{{ pauseLabel }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-grow: 1; min-height: 0;">
+
+    <div style="width: 268px; flex-shrink: 0; display: flex; flex-direction: column; background: #FFFFFF; border-right: 1.5px solid #F0F0EE;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 15px 16px 13px; border-bottom: 1.5px solid #F0F0EE;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.16em; color: #A0A0A8;">12 CREWS OUT THERE</span>
+      </div>
+      <div style="display: flex; flex-direction: column; padding: 8px;">
+        <sc-for list="{{ crews }}" as="c" hint-placeholder-count="7">
+          <div class="crew" onClick="{{ c.tap }}" style="display: flex; align-items: center; gap: 11px; padding: 11px 12px; border-radius: 14px; background: {{ c.bg }};">
+            <span style="width: 11px; height: 11px; border-radius: 50%; background: {{ c.hue }}; flex-shrink: 0;"></span>
+            <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: -0.02em; line-height: 1.1;">{{ c.name }}</span>
+              <span style="font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.05em; color: {{ c.stateInk }};">{{ c.state }}</span>
+            </div>
+            <span style="flex-shrink: 0; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 16px; letter-spacing: -0.03em; color: #6B6B72;">{{ c.score }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="position: relative; flex-grow: 1; overflow: hidden; background: #F3F5F3;">
+
+      <svg viewBox="0 0 860 786" width="100%" height="100%" style="position: absolute; inset: 0;" aria-hidden="true">
+        <g stroke="#E3E7E3" stroke-width="1.5" fill="none">
+          <path d="M0 98 H860 M0 196 H860 M0 294 H860 M0 392 H860 M0 490 H860 M0 588 H860 M0 686 H860"></path>
+          <path d="M86 0 V786 M172 0 V786 M258 0 V786 M344 0 V786 M430 0 V786 M516 0 V786 M602 0 V786 M688 0 V786 M774 0 V786"></path>
+        </g>
+        <g fill="#E9EDE9" stroke="none">
+          <rect x="120" y="180" width="150" height="96" rx="10"></rect>
+          <rect x="430" y="300" width="180" height="120" rx="10"></rect>
+          <rect x="620" y="140" width="130" height="90" rx="10"></rect>
+          <rect x="240" y="520" width="200" height="110" rx="10"></rect>
+        </g>
+        <g fill="none" stroke="#D3DAD4" stroke-width="7" stroke-linecap="round">
+          <path d="M40 640 C 180 580, 250 460, 380 420 S 600 350, 830 200"></path>
+          <path d="M100 60 C 260 160, 340 260, 500 300 S 720 400, 840 540"></path>
+        </g>
+        <g fill="rgba(75,59,255,0.09)" stroke="#4B3BFF" stroke-width="2.5" stroke-dasharray="7 6">
+          <circle cx="300" cy="228" r="42"></circle>
+          <circle cx="520" cy="360" r="42"></circle>
+          <circle cx="686" cy="185" r="42"></circle>
+          <circle cx="340" cy="575" r="42"></circle>
+        </g>
+        <g fill="none" stroke-width="4" stroke-linecap="round">
+          <path d="M120 620 C 200 520, 250 320, 300 228" stroke="#FF4B3B" opacity="0.4"></path>
+          <path d="M300 228 C 380 270, 450 330, 520 360" stroke="#FF4B3B" opacity="0.75"></path>
+          <path d="M150 560 C 240 480, 300 500, 340 575" stroke="#00C97A" opacity="0.7"></path>
+          <path d="M560 420 C 620 330, 650 250, 686 185" stroke="#FFC400" opacity="0.7"></path>
+        </g>
+        <g class="flow" fill="none" stroke="#4B3BFF" stroke-width="3" stroke-linecap="round">
+          <path d="M520 360 C 580 300, 630 240, 686 185"></path>
+        </g>
+      </svg>
+
+      <sc-for list="{{ blips }}" as="b" hint-placeholder-count="5">
+        <div style="position: absolute; left: {{ b.x }}; top: {{ b.y }}; width: 20px; height: 20px; margin: -10px 0 0 -10px;">
+          <span class="blip" style="position: absolute; inset: 0; border-radius: 50%; background: {{ b.hue }};"></span>
+          <span style="position: absolute; left: 3px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: {{ b.hue }}; border: 2.5px solid #FFFFFF; box-shadow: 0 2px 7px rgba(11,11,12,0.24);"></span>
+        </div>
+      </sc-for>
+
+      <sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}">
+        <div style="position: absolute; left: 0; right: 0; top: 44%; padding: 22px 0; text-align: center; background: #FF4B3B; box-shadow: 0 12px 40px rgba(255,75,59,0.34);">
+          <div style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -0.04em; color: #FFFFFF;">EVERYTHING IS PAUSED</div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #FFD9D4; margin-top: 8px;">ALL CLOCKS FROZEN &middot; EVERY CREW HAS BEEN TOLD</div>
+        </div>
+      </sc-if>
+
+      <div style="position: absolute; left: 18px; top: 16px; display: flex; flex-direction: column; gap: 5px; padding: 13px 15px 14px; border-radius: 16px; background: #FFFFFF; box-shadow: 0 4px 18px rgba(11,11,12,0.1);">
+        <span style="font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.16em; color: #A0A0A8;">LIVE POSITIONS</span>
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 16px; letter-spacing: -0.025em;">IIT Roorkee &middot; 1.6 km across</span>
+        <span style="font-size: 12px; color: #6B6B72;">Pings every 15s &middot; trails fade after 6 min</span>
+      </div>
+    </div>
+
+    <div style="width: 312px; flex-shrink: 0; display: flex; flex-direction: column; background: #FFFFFF; border-left: 1.5px solid #F0F0EE;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 15px 16px 13px; border-bottom: 1.5px solid #F0F0EE;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.16em; color: #A0A0A8;">NEEDS YOU</span>
+        <span style="display: flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: #FF4B3B; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: #FFFFFF;">4</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px; padding: 12px;">
+        <sc-for list="{{ alerts }}" as="a" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 9px; padding: 14px 14px 15px; border-radius: 18px; background: {{ a.tint }};">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+              <span style="display: flex; align-items: center; gap: 7px;">
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ a.hue }};"></span>
+                <span style="font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: {{ a.hue }};">{{ a.kind }}</span>
+              </span>
+              <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: #A0A0A8;">{{ a.ago }}</span>
+            </div>
+            <span style="font-size: 13px; line-height: 1.45; color: #0B0B0C;">{{ a.body }}</span>
+            <div style="display: flex; gap: 7px;">
+              <span class="chip" onClick="{{ a.act }}" style="padding: 8px 13px; border-radius: 999px; background: #FFFFFF; font-size: 12px; font-weight: 500; color: #0B0B0C;">{{ a.cta }}</span>
+              <span class="chip" onClick="{{ a.act }}" style="padding: 8px 13px; border-radius: 999px; font-size: 12px; color: #A0A0A8;">Dismiss</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="display: flex; align-items: center; height: 46px; flex-shrink: 0; overflow: hidden; background: #FBFBFA; border-top: 1.5px solid #F0F0EE;">
+    <span style="flex-shrink: 0; padding: 0 16px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.16em; color: #A0A0A8; border-right: 1.5px solid #F0F0EE; line-height: 46px;">FEED</span>
+    <div style="flex-grow: 1; overflow: hidden;">
+      <div class="ticker" style="display: flex; gap: 34px; white-space: nowrap; font-size: 13px; color: #6B6B72;">
+        <span>17:42 &middot; <strong style="color: #0B0B0C;">Cartographers Anon.</strong> cleared The Water Tower &mdash; first blood <strong style="color: #00885A;">+140</strong></span>
+        <span>17:39 &middot; <strong style="color: #0B0B0C;">Off The Chart</strong> bought the full answer at The Sundial <strong style="color: #D62E1F;">-60</strong></span>
+        <span>17:36 &middot; <strong style="color: #D62E1F;">Teleport flag</strong> on Landlubbers United &mdash; waiting on a marshal</span>
+        <span>17:31 &middot; <strong style="color: #0B0B0C;">The Compass Rose</strong> took the north branch</span>
+        <span>17:42 &middot; <strong style="color: #0B0B0C;">Cartographers Anon.</strong> cleared The Water Tower &mdash; first blood <strong style="color: #00885A;">+140</strong></span>
+        <span>17:39 &middot; <strong style="color: #0B0B0C;">Off The Chart</strong> bought the full answer at The Sundial <strong style="color: #D62E1F;">-60</strong></span>
+        <span>17:36 &middot; <strong style="color: #D62E1F;">Teleport flag</strong> on Landlubbers United &mdash; waiting on a marshal</span>
+        <span>17:31 &middot; <strong style="color: #0B0B0C;">The Compass Rose</strong> took the north branch</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"$preview":{"width":1440,"height":900}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.18, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.04);
+  },
+  tap: function () { this.tone(880, 0.05, 'triangle', 0.09, 1180); },
+  halt: function () { this.tone(420, 0.18, 'square', 0.13, 210); this.tone(300, 0.22, 'square', 0.11, 160, 0.14); },
+  resume: function () { this.tone(420, 0.16, 'triangle', 0.13, 700); this.tone(700, 0.2, 'triangle', 0.12, 950, 0.12); },
+  hail: function () {
+    var self = this;
+    [523.25, 698.46].forEach(function (f, i) {
+      self.tone(f, 0.3, 'triangle', 0.13, null, i * 0.11);
+    });
+  }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { paused: false, sel: 'a' };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  renderVals() {
+    var self = this;
+    var p = this.state.paused;
+    var defs = [
+      { id: 'a', name: 'Cartographers Anon.', state: '5 CLUES · MOVING', score: 1580, hue: '#FF4B3B', ok: true },
+      { id: 'b', name: 'The Compass Rose', state: '5 CLUES · MOVING', score: 1420, hue: '#00C97A', ok: true },
+      { id: 'c', name: 'Dead Reckoning', state: '4 CLUES · MOVING', score: 1320, hue: '#FFC400', ok: true },
+      { id: 'd', name: 'The Salted Crew', state: '4 CLUES · MOVING', score: 1240, hue: '#4B3BFF', ok: true },
+      { id: 'e', name: 'Landlubbers United', state: 'FLAGGED · TELEPORT', score: 940, hue: '#C88AD8', ok: false },
+      { id: 'f', name: 'Off The Chart', state: 'STUCK 14 MIN', score: 880, hue: '#00B8D9', ok: false },
+      { id: 'g', name: 'The Long Way Round', state: '2 CLUES · MOVING', score: 640, hue: '#F08A3C', ok: true }
+    ];
+    return {
+      crews: defs.map(function (d) {
+        var on = self.state.sel === d.id;
+        return {
+          name: d.name,
+          state: d.state,
+          score: d.score,
+          hue: d.hue,
+          stateInk: d.ok ? '#A0A0A8' : '#D62E1F',
+          bg: on ? '#F4F3FF' : 'transparent',
+          tap: function () { self.play('tap'); self.setState({ sel: d.id }); }
+        };
+      }),
+      blips: [
+        { x: '300px', y: '228px', hue: '#FF4B3B' },
+        { x: '340px', y: '575px', hue: '#00C97A' },
+        { x: '560px', y: '420px', hue: '#FFC400' },
+        { x: '215px', y: '360px', hue: '#4B3BFF' },
+        { x: '700px', y: '280px', hue: '#C88AD8' }
+      ],
+      alerts: [
+        { kind: 'STUCK', hue: '#FFC400', tint: '#FFFBEC', ago: '14 min', body: 'Off The Chart has not moved from The Sundial. Three wrong codes.', cta: 'Give them a hint', act: function () { self.play('tap'); } },
+        { kind: 'TELEPORT', hue: '#FF4B3B', tint: '#FFF2F0', ago: '6 min', body: 'Landlubbers United jumped 1.2 km in 40 seconds with no pings between.', cta: 'Open the track', act: function () { self.play('tap'); } },
+        { kind: 'WEAK FIX', hue: '#00B8D9', tint: '#EDFAFD', ago: '2 min', body: 'The Long Way Round keeps failing at the water tower. Accuracy 60 m.', cta: 'Widen the fence', act: function () { self.play('tap'); } },
+        { kind: 'SPLIT UP', hue: '#8A6EC0', tint: '#F6F2FC', ago: 'just now', body: 'Dead Reckoning is on two phones, 700 m apart. Probably fine.', cta: 'Keep watching', act: function () { self.play('tap'); } }
+      ],
+      paused: p,
+      liveBg: p ? '#FFF2F0' : '#F1FBF6',
+      liveDot: p ? '#FF4B3B' : '#00C97A',
+      liveInk: p ? '#D62E1F' : '#00885A',
+      liveLabel: p ? 'PAUSED' : 'RUNNING',
+      pauseLabel: p ? 'RESUME' : 'PAUSE EVERYTHING',
+      pauseBg: p ? '#00C97A' : '#FF4B3B',
+      pauseShadow: p ? '#00A063' : '#D62E1F',
+      toggle: function () {
+        self.play(self.state.paused ? 'resume' : 'halt');
+        self.setState({ paused: !self.state.paused });
+      },
+      hail: function () { self.play('hail'); }
+    };
+  }
+}
+</script>
+</body>
+</html>

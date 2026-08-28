@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #F6F6F4; }
+    a { color: #4B3BFF; }
+    a:hover { color: #2E1FD6; }
+    .card { transition: transform 150ms cubic-bezier(0.3, 1.3, 0.5, 1), background 180ms ease, border-color 180ms ease; cursor: pointer; }
+    .card:active { transform: scale(0.985); }
+    .sheet { animation: sheet 560ms cubic-bezier(0.2, 1.1, 0.3, 1) both; }
+    @keyframes sheet {
+      0% { transform: translateY(70px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .unfold { animation: unfold 400ms cubic-bezier(0.2, 1.2, 0.35, 1) both; }
+    @keyframes unfold {
+      0% { opacity: 0; transform: translateY(-8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .push { transition: transform 110ms cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 110ms ease; }
+    .push:active { transform: translateY(5px); box-shadow: 0 0 0 #2E1FD6; }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #EDEDEA; font-family: 'Space Grotesk', system-ui, sans-serif; color: #0B0B0C; display: flex; flex-direction: column;">
+
+  <div style="position: relative; height: 160px; flex-shrink: 0; overflow: hidden; background: #FFFFFF; padding: 22px 22px 0;">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+      <div style="display: flex; flex-direction: column; gap: 3px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #A0A0A8;">MONSOON RECKONING</span>
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; line-height: 1;">The Salted Crew</span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 5px; padding: 8px 13px 9px; border-radius: 999px; background: #0B0B0C;">
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 20px; line-height: 1; color: #FFFFFF; letter-spacing: -0.03em;">{{ score }}</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: #8A8A96;">PTS</span>
+      </div>
+    </div>
+    <div style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 600; font-size: 24px; line-height: 1.14; letter-spacing: -0.025em; color: #C8C8CE; margin-top: 20px;">The iron bird has watched this quad since &rsquo;47&hellip;</div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(rgba(237,237,234,0.1), rgba(237,237,234,0.9));"></div>
+  </div>
+
+  <div class="sheet" style="position: relative; flex-grow: 1; display: flex; flex-direction: column; background: #FFFFFF; border-radius: 34px 34px 0 0; box-shadow: 0 -16px 40px rgba(11,11,12,0.1);">
+
+    <div style="display: flex; justify-content: center; padding: 12px 0 0;">
+      <span style="width: 44px; height: 5px; border-radius: 999px; background: #E8E8E6;"></span>
+    </div>
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; padding: 18px 22px 20px;">
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 32px; line-height: 1; letter-spacing: -0.04em;">Need a hand?</span>
+        <span style="font-size: 14px; color: #6B6B72;">Each one costs you. Pick the smallest that works.</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 9px; padding: 0 18px;">
+      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="4">
+        <div class="card" onClick="{{ t.buy }}" style="padding: 15px 16px 16px; border-radius: 20px; background: {{ t.bg }}; border: 1.5px solid {{ t.edge }};">
+          <div style="display: flex; align-items: center; gap: 13px;">
+            <div style="display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; flex-shrink: 0; border-radius: 13px; background: {{ t.badgeBg }};">
+              <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 17px; color: {{ t.badgeInk }};">{{ t.num }}</span>
+            </div>
+            <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -0.02em; line-height: 1.1;">{{ t.name }}</span>
+              <span style="font-size: 13px; color: #6B6B72;">{{ t.note }}</span>
+            </div>
+            <span style="flex-shrink: 0; padding: 7px 13px 8px; border-radius: 999px; background: {{ t.pillBg }}; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: {{ t.pillInk }};">{{ t.pill }}</span>
+          </div>
+          <sc-if value="{{ t.open }}" hint-placeholder-val="{{ true }}">
+            <div class="unfold" style="margin-top: 13px; padding: 13px 15px 14px; border-radius: 14px; background: #FFFFFF;">
+              <span style="font-size: 15px; line-height: 1.45; color: #0B0B0C;">{{ t.text }}</span>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex-grow: 1;"></div>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px 22px 26px; border-top: 1.5px solid #F0F0EE;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #A0A0A8;">SPENT THIS CLUE</span>
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px; line-height: 1; letter-spacing: -0.03em; color: {{ spentInk }};">{{ spentLabel }}</span>
+      </div>
+      <div class="push" onClick="{{ close }}" style="display: flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; background: #4B3BFF; box-shadow: 0 5px 0 #2E1FD6; cursor: pointer;">
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 16px; letter-spacing: -0.01em; color: #FFFFFF;">BACK TO IT</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"$preview":{"width":390,"height":844}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.18, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.04);
+  },
+  noise: function (dur, freq, q, vol) {
+    var c = this.ac();
+    if (!c) { return; }
+    var n = Math.floor(c.sampleRate * dur);
+    var b = c.createBuffer(1, n, c.sampleRate);
+    var d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) { d[i] = (Math.random() * 2 - 1) * (1 - i / n); }
+    var s = c.createBufferSource();
+    s.buffer = b;
+    var f = c.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = freq;
+    f.Q.value = q || 1;
+    var g = c.createGain();
+    g.gain.value = vol || 0.14;
+    s.connect(f);
+    f.connect(g);
+    g.connect(c.destination);
+    s.start();
+  },
+  unwrap: function () { this.noise(0.24, 3000, 0.6, 0.1); this.tone(700, 0.12, 'sine', 0.12, 1150); },
+  spend: function () { this.tone(560, 0.16, 'triangle', 0.15, 300); },
+  pop: function () { this.tone(520, 0.1, 'sine', 0.2, 940); },
+  tap: function () { this.tone(880, 0.05, 'triangle', 0.09, 1180); }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: {}, score: 1240, spent: 0 };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  renderVals() {
+    var self = this;
+    var defs = [
+      { id: 'nudge', num: '1', name: 'A nudge', note: 'Just a direction', cost: 10, hue: '#00C97A', tint: '#F1FBF6', edgeOn: '#C4EFDB', text: 'You are looking too high. Bring your eyes right down to the ground.' },
+      { id: 'hint', num: '2', name: 'A real hint', note: 'Narrows it a lot', cost: 30, hue: '#FFC400', tint: '#FFFBEC', edgeOn: '#FFE9A8', text: 'It is a plaque, not a building. Brass, and older than the paint around it.' },
+      { id: 'plain', num: '3', name: 'Just tell me', note: 'The answer, plainly', cost: 60, hue: '#FF4B3B', tint: '#FFF2F0', edgeOn: '#FFD2CC', text: 'North face of the Civil block, left of the arch, at knee height.' },
+      { id: 'skip', num: '4', name: 'Skip this clue', note: 'Move on. It hurts', cost: 150, hue: '#0B0B0C', tint: '#F6F6F4', edgeOn: '#D8D8DC', action: true }
+    ];
+    var tiers = defs.map(function (d) {
+      var bought = !!self.state.open[d.id];
+      return {
+        num: d.num,
+        name: d.name,
+        note: d.note,
+        text: d.text,
+        open: bought && !d.action,
+        bg: bought ? d.tint : '#FFFFFF',
+        edge: bought ? d.edgeOn : '#EDEDEA',
+        badgeBg: bought ? d.hue : '#F6F6F4',
+        badgeInk: bought ? '#FFFFFF' : '#A0A0A8',
+        pill: bought ? (d.action ? 'SKIPPED' : 'PAID') : '-' + d.cost,
+        pillBg: bought ? d.hue : '#F6F6F4',
+        pillInk: bought ? '#FFFFFF' : '#6B6B72',
+        buy: function () {
+          if (self.state.open[d.id]) { self.play('tap'); return; }
+          self.play('unwrap');
+          setTimeout(function () { self.play('spend'); }, 130);
+          var next = Object.assign({}, self.state.open);
+          next[d.id] = true;
+          self.setState({ open: next, score: self.state.score - d.cost, spent: self.state.spent + d.cost });
+        }
+      };
+    });
+    return {
+      tiers: tiers,
+      score: this.state.score,
+      spentLabel: this.state.spent === 0 ? 'Nothing yet' : '-' + this.state.spent + ' pts',
+      spentInk: this.state.spent === 0 ? '#A0A0A8' : '#FF4B3B',
+      close: function () { self.play('pop'); }
+    };
+  }
+}
+</script>
+</body>
+</html>

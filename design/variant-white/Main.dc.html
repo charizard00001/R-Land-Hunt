@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #F6F6F4; }
+    a { color: #4B3BFF; }
+    a:hover { color: #2E1FD6; }
+    .push { transition: transform 110ms cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 110ms ease; }
+    .push:active { transform: translateY(6px); box-shadow: 0 0 0 #2E1FD6; }
+    .ghost { transition: transform 110ms ease, background 140ms ease; }
+    .ghost:active { transform: scale(0.97); background: #EFEFEC; }
+    .ring { animation: ringpulse 2.6s ease-in-out infinite; }
+    @keyframes ringpulse {
+      0% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.045); opacity: 0.45; }
+      100% { transform: scale(1); opacity: 0.9; }
+    }
+    .arrow { animation: arrowsway 3.6s ease-in-out infinite; }
+    @keyframes arrowsway {
+      0% { transform: rotate(69deg); }
+      50% { transform: rotate(75deg); }
+      100% { transform: rotate(69deg); }
+    }
+    .slap { animation: slap 460ms cubic-bezier(0.2, 1.7, 0.35, 1) both; }
+    @keyframes slap {
+      0% { transform: rotate(-5deg) scale(1.9); opacity: 0; }
+      60% { transform: rotate(-5deg) scale(0.95); opacity: 1; }
+      100% { transform: rotate(-5deg) scale(1); opacity: 1; }
+    }
+    .marq { animation: marq 18s linear infinite; }
+    @keyframes marq {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #FFFFFF; font-family: 'Space Grotesk', system-ui, sans-serif; color: #0B0B0C; display: flex; flex-direction: column;">
+
+  <div style="position: absolute; left: -120px; top: 330px; width: 300px; height: 300px; border-radius: 50%; background: #4B3BFF; opacity: 0.05; pointer-events: none;"></div>
+  <div style="position: absolute; right: -90px; top: 90px; width: 200px; height: 200px; border-radius: 50%; background: #FF4B3B; opacity: 0.06; pointer-events: none;"></div>
+
+  <div style="position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 22px 22px 0;">
+    <div style="display: flex; flex-direction: column; gap: 3px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #A0A0A8;">MONSOON RECKONING</span>
+      <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; line-height: 1;">The Salted Crew</span>
+    </div>
+    <div style="display: flex; align-items: baseline; gap: 5px; padding: 8px 13px 9px; border-radius: 999px; background: #0B0B0C;">
+      <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 20px; line-height: 1; color: #FFFFFF; letter-spacing: -0.03em;">1240</span>
+      <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: #8A8A96;">PTS</span>
+    </div>
+  </div>
+
+  <div style="position: relative; display: flex; align-items: center; gap: 10px; padding: 20px 22px 0;">
+    <div style="display: flex; gap: 5px; flex-grow: 1;">
+      <span style="flex-grow: 1; height: 6px; border-radius: 999px; background: #4B3BFF;"></span>
+      <span style="flex-grow: 1; height: 6px; border-radius: 999px; background: #4B3BFF;"></span>
+      <span style="flex-grow: 1; height: 6px; border-radius: 999px; background: #4B3BFF;"></span>
+      <span style="flex-grow: 1; height: 6px; border-radius: 999px; background: #E8E8E6;"></span>
+      <span style="flex-grow: 1; height: 6px; border-radius: 999px; background: #E8E8E6;"></span>
+      <span style="flex-grow: 1; height: 6px; border-radius: 999px; background: #E8E8E6;"></span>
+      <span style="flex-grow: 1; height: 6px; border-radius: 999px; background: #E8E8E6;"></span>
+    </div>
+    <span style="font-family: 'Space Mono', monospace; font-size: 10px; color: #6B6B72; flex-shrink: 0;">41:18</span>
+  </div>
+
+  <div style="position: relative; padding: 26px 22px 0;">
+    <div style="display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px 6px; border-radius: 999px; background: #FFF0EE; margin-bottom: 13px;">
+      <span style="width: 6px; height: 6px; border-radius: 50%; background: #FF4B3B;"></span>
+      <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #D62E1F;">CLUE 04</span>
+    </div>
+    <div style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 600; font-size: 29px; line-height: 1.12; letter-spacing: -0.028em; color: #0B0B0C; text-wrap: pretty;">The iron bird has watched this quad since &rsquo;47. Count the steps beneath her wing.</div>
+  </div>
+
+  <div style="position: relative; flex-grow: 1; display: flex; align-items: center; justify-content: center;">
+    <div style="position: relative; width: 244px; height: 244px;">
+      <div class="ring" style="position: absolute; inset: 0; border-radius: 50%; background: #4B3BFF; opacity: 0.08;"></div>
+      <svg viewBox="0 0 244 244" width="244" height="244" style="position: absolute; inset: 0;" aria-hidden="true">
+        <circle cx="122" cy="122" r="104" fill="none" stroke="#F0F0EE" stroke-width="16"></circle>
+        <circle cx="122" cy="122" r="104" fill="none" stroke="#4B3BFF" stroke-width="16" stroke-linecap="round" stroke-dasharray="653.5" stroke-dashoffset="222" transform="rotate(-90 122 122)"></circle>
+      </svg>
+      <div class="arrow" style="position: absolute; inset: 0; transform: rotate(72deg);">
+        <div style="position: absolute; left: 50%; top: -9px; width: 34px; height: 34px; margin-left: -17px; border-radius: 12px; background: #FF4B3B; box-shadow: 0 5px 14px rgba(255,75,59,0.42); display: flex; align-items: center; justify-content: center;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 19V6"></path>
+            <path d="M6 12l6-6 6 6"></path>
+          </svg>
+        </div>
+      </div>
+      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+        <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 72px; line-height: 0.88; letter-spacing: -0.05em; color: #0B0B0C;">142</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.22em; color: #A0A0A8;">METRES</span>
+        <span style="margin-top: 7px; padding: 4px 10px 5px; border-radius: 999px; background: #F0F0EE; font-family: 'Space Mono', monospace; font-size: 10px; color: #6B6B72;">HEAD EAST</span>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{ miss }}" hint-placeholder-val="{{ true }}">
+    <div class="slap" style="position: absolute; left: 50%; top: 452px; width: 258px; margin-left: -129px; padding: 16px 0 18px; text-align: center; border-radius: 22px; background: #FF4B3B; box-shadow: 0 14px 34px rgba(255,75,59,0.4);">
+      <div style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 28px; line-height: 1; letter-spacing: -0.03em; color: #FFFFFF;">NOT YET!</div>
+      <div style="font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #FFD9D4; margin-top: 6px;">142 M OUT &middot; KEEP MOVING</div>
+    </div>
+  </sc-if>
+
+  <div style="position: relative; overflow: hidden; padding: 0 0 14px;">
+    <div class="marq" style="display: flex; gap: 26px; white-space: nowrap; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: #C8C8CE;">
+      <span>DEAD RECKONING TOOK CLUE 04</span><span>&bull;</span><span>YOU ARE 4TH</span><span>&bull;</span><span>80 POINTS OFF THIRD</span><span>&bull;</span>
+      <span>DEAD RECKONING TOOK CLUE 04</span><span>&bull;</span><span>YOU ARE 4TH</span><span>&bull;</span><span>80 POINTS OFF THIRD</span><span>&bull;</span>
+    </div>
+  </div>
+
+  <div style="position: relative; display: flex; flex-direction: column; gap: 11px; padding: 0 22px 26px;">
+    <div class="ghost" onClick="{{ nudge }}" style="display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 54px; border-radius: 999px; background: #F6F6F4; border: 1.5px solid #E8E8E6; cursor: pointer;">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#6B6B72" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+        <path d="M12 4a6 6 0 0 0-3.5 10.9c.5.4.8 1 .8 1.6v.5h5.4v-.5c0-.6.3-1.2.8-1.6A6 6 0 0 0 12 4Z"></path>
+        <path d="M10 20.5h4"></path>
+      </svg>
+      <span style="font-size: 14px; font-weight: 500; color: #6B6B72;">Need a nudge?</span>
+      <span style="padding: 3px 8px 4px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E8E8E6; font-family: 'Space Mono', monospace; font-size: 10px; color: #A0A0A8;">-10</span>
+    </div>
+    <div class="push" onClick="{{ check }}" style="display: flex; align-items: center; justify-content: center; gap: 11px; min-height: 68px; border-radius: 999px; background: #4B3BFF; box-shadow: 0 6px 0 #2E1FD6, 0 16px 30px rgba(75,59,255,0.34); cursor: pointer;">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="10" r="3"></circle>
+        <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"></path>
+      </svg>
+      <span style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: #FFFFFF;">I&rsquo;M HERE</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"accent":{"editor":"color","default":"#4B3BFF","options":["#4B3BFF","#FF4B3B","#00C97A","#0B0B0C"],"section":"Feel"},"$preview":{"width":390,"height":844}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.18, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.04);
+  },
+  noise: function (dur, freq, q, vol) {
+    var c = this.ac();
+    if (!c) { return; }
+    var n = Math.floor(c.sampleRate * dur);
+    var b = c.createBuffer(1, n, c.sampleRate);
+    var d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) { d[i] = (Math.random() * 2 - 1) * (1 - i / n); }
+    var s = c.createBufferSource();
+    s.buffer = b;
+    var f = c.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = freq;
+    f.Q.value = q || 1;
+    var g = c.createGain();
+    g.gain.value = vol || 0.14;
+    s.connect(f);
+    f.connect(g);
+    g.connect(c.destination);
+    s.start();
+  },
+  pop: function () { this.tone(520, 0.1, 'sine', 0.2, 940); },
+  tap: function () { this.tone(880, 0.05, 'triangle', 0.1, 1180); },
+  nope: function () { this.tone(300, 0.11, 'square', 0.14, 190); this.tone(220, 0.16, 'square', 0.12, 140, 0.1); },
+  swish: function () { this.noise(0.2, 2400, 0.7, 0.08); }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { miss: false };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    var self = this;
+    return {
+      miss: this.state.miss,
+      check: function () {
+        self.play('pop');
+        setTimeout(function () { self.play('nope'); }, 110);
+        self.setState({ miss: true });
+        clearTimeout(self._t);
+        self._t = setTimeout(function () { self.setState({ miss: false }); }, 2500);
+      },
+      nudge: function () { self.play('swish'); }
+    };
+  }
+}
+</script>
+</body>
+</html>

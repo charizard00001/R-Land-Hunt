@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bitter:ital,wght@0,400;0,600;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #cfc0a0; }
+    a { color: #b8332a; }
+    a:hover { color: #7d1c16; }
+    .grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.5; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.34'/%3E%3C/svg%3E");
+    }
+    .pulse { animation: pulse 1.5s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+    @keyframes pulse {
+      0% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.12); }
+      100% { opacity: 0.3; transform: scale(0.8); }
+    }
+    .row { transition: background 140ms ease, transform 160ms cubic-bezier(0.3, 1.5, 0.5, 1); cursor: pointer; }
+    .row:active { transform: scale(0.985); }
+    .drop { animation: drop 340ms cubic-bezier(0.2, 1.5, 0.35, 1) both; }
+    @keyframes drop {
+      0% { opacity: 0; transform: translateY(-8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .push { transition: transform 120ms cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 120ms ease; }
+    .push:active { transform: translateY(4px); box-shadow: 0 0 0 #8d2019; }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: linear-gradient(#f2e6c8 0%, #e2d4b1 55%, #cfbe96 100%); font-family: 'Bitter', Georgia, serif; color: #241a12; display: flex; flex-direction: column;">
+
+  <div style="position: absolute; left: 52px; top: 0; bottom: 0; width: 2px; background: rgba(184,51,42,0.3); pointer-events: none;"></div>
+  <div style="position: absolute; left: 0; right: 0; top: 130px; bottom: 122px; pointer-events: none; background: repeating-linear-gradient(180deg, transparent 0 65px, rgba(120,100,66,0.24) 65px 66px);"></div>
+  <div class="grain"></div>
+
+  <div style="position: relative; display: flex; flex-direction: column; gap: 11px; padding: 26px 20px 0;">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+      <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 34px; letter-spacing: -0.022em; line-height: 1;">THE RECKONING</div>
+      <div style="display: flex; align-items: center; gap: 7px; padding: 5px 10px 6px; background: #b8332a;">
+        <span class="pulse" style="width: 7px; height: 7px; border-radius: 50%; background: #fbeeda;"></span>
+        <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; color: #fbeeda;">LIVE</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 12px; border-bottom: 3px solid #241a12;">
+      <span style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.16em; color: #7a6749;">12 CREWS AFLOAT &middot; 0:41:18 REMAINS</span>
+      <span onClick="{{ refresh }}" style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: #b8332a; cursor: pointer;">TURN THE PAGE</span>
+    </div>
+  </div>
+
+  <div style="position: relative; flex-grow: 1; display: flex; flex-direction: column;">
+    <sc-for list="{{ crews }}" as="c" hint-placeholder-count="6">
+      <div class="row" onClick="{{ c.tap }}" style="display: flex; flex-direction: column; padding: 0 20px; background: {{ c.rowBg }};">
+        <div style="display: flex; align-items: center; gap: 13px; height: 66px;">
+          <div style="position: relative; width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: {{ c.medal }}; border: 2px solid {{ c.medalEdge }}; box-shadow: {{ c.medalShadow }};">
+            <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 15px; color: {{ c.rankInk }};">{{ c.rank }}</span>
+          </div>
+          <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+            <span style="font-family: 'Bitter', Georgia, serif; font-weight: 700; font-size: 17px; line-height: 1.1; color: {{ c.nameInk }};">{{ c.name }}</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.12em; color: #7a6749;">{{ c.marks }}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 9px; flex-shrink: 0;">
+            <span style="padding: 3px 7px 4px; background: {{ c.moveBg }}; font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.06em; color: {{ c.moveInk }};">{{ c.move }}</span>
+            <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 24px; color: #241a12; min-width: 56px; text-align: right;">{{ c.score }}</span>
+          </div>
+        </div>
+        <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+          <div class="drop" style="padding: 0 0 13px 47px;">
+            <span style="font-family: 'Bitter', Georgia, serif; font-style: italic; font-weight: 500; font-size: 15px; color: #6b5738;">{{ c.detail }}</span>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="position: relative; margin: 0 16px 22px; padding: 15px 16px 16px; background: linear-gradient(#f8eed4, #e8dab6); border: 3px solid #b8332a; transform: rotate(-0.7deg); box-shadow: 0 6px 0 #8d2019, 0 14px 22px rgba(45,30,14,0.28);">
+    <div style="position: absolute; left: 50%; top: -11px; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; background: radial-gradient(circle at 34% 28%, #e05a4c, #96231d 60%, #5c1310); box-shadow: 0 2px 5px rgba(40,10,8,0.55);"></div>
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+      <div style="display: flex; flex-direction: column; gap: 3px;">
+        <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.2em; color: #b8332a;">YOUR CREW</span>
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 22px; line-height: 1; color: #241a12;">THE SALTED CREW</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 30px; line-height: 1; color: #b8332a;">4th</span>
+        <span style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.12em; color: #2f5d3a;">80 BEHIND THIRD</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"$preview":{"width":390,"height":844}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.03);
+  },
+  noise: function (dur, freq, q, vol) {
+    var c = this.ac();
+    if (!c) { return; }
+    var n = Math.floor(c.sampleRate * dur);
+    var b = c.createBuffer(1, n, c.sampleRate);
+    var d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) { d[i] = (Math.random() * 2 - 1) * (1 - i / n); }
+    var s = c.createBufferSource();
+    s.buffer = b;
+    var f = c.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = freq;
+    f.Q.value = q || 1;
+    var g = c.createGain();
+    g.gain.value = vol || 0.2;
+    s.connect(f);
+    f.connect(g);
+    g.connect(c.destination);
+    s.start();
+  },
+  tick: function () { this.tone(1350, 0.03, 'square', 0.055); },
+  page: function () { this.noise(0.3, 2400, 0.5, 0.14); }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: null };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  renderVals() {
+    var self = this;
+    var defs = [
+      { id: 'a', rank: 'I', name: 'Cartographers Anonymous', marks: '5 MARKS · NO HINTS', score: 1580, move: 'HELD', up: null, detail: 'last mark at the water tower, 3 min ago' },
+      { id: 'b', rank: 'II', name: 'The Compass Rose', marks: '5 MARKS · 1 HINT', score: 1420, move: 'UP 2', up: true, detail: 'last mark at the old library steps, 6 min ago' },
+      { id: 'c', rank: 'III', name: 'Dead Reckoning', marks: '4 MARKS · NO HINTS', score: 1320, move: 'UP 1', up: true, detail: 'last mark behind the workshop, 2 min ago' },
+      { id: 'd', rank: 'IV', name: 'The Salted Crew', marks: '4 MARKS · 2 HINTS', score: 1240, move: 'DOWN 1', up: false, detail: 'you were last seen at the iron bird, just now', mine: true },
+      { id: 'e', rank: 'V', name: 'Landlubbers United', marks: '3 MARKS · 3 HINTS', score: 940, move: 'HELD', up: null, detail: 'last mark at the canteen gate, 11 min ago' },
+      { id: 'f', rank: 'VI', name: 'Off The Chart', marks: '3 MARKS · 1 HINT', score: 880, move: 'UP 3', up: true, detail: 'last mark at the sundial, 4 min ago' }
+    ];
+    var crews = defs.map(function (d) {
+      var top3 = d.rank === 'I' || d.rank === 'II' || d.rank === 'III';
+      return {
+        rank: d.rank,
+        name: d.name,
+        marks: d.marks,
+        score: d.score,
+        move: d.move,
+        open: self.state.open === d.id,
+        detail: d.detail,
+        moveInk: d.up === true ? '#eaf6ec' : (d.up === false ? '#fbeeda' : '#7a6749'),
+        moveBg: d.up === true ? '#2f5d3a' : (d.up === false ? '#b8332a' : 'rgba(122,103,73,0.16)'),
+        nameInk: d.mine ? '#b8332a' : '#241a12',
+        rowBg: d.mine ? 'rgba(184,51,42,0.07)' : 'transparent',
+        medal: d.rank === 'I' ? 'linear-gradient(#f2cd7c, #b8873a)' : (d.rank === 'II' ? 'linear-gradient(#e2dcce, #a9a294)' : (d.rank === 'III' ? 'linear-gradient(#dcac7e, #a5734a)' : 'transparent')),
+        medalEdge: top3 ? '#241a12' : 'rgba(122,103,73,0.45)',
+        medalShadow: top3 ? '0 3px 0 rgba(36,26,18,0.5)' : 'none',
+        rankInk: top3 ? '#241a12' : '#7a6749',
+        tap: function () {
+          self.play('tick');
+          self.setState({ open: self.state.open === d.id ? null : d.id });
+        }
+      };
+    });
+    return {
+      crews: crews,
+      refresh: function () { self.play('page'); self.setState({ open: null }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

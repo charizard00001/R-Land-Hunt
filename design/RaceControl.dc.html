@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bitter:ital,wght@0,400;0,600;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #0c1116; }
+    a { color: #e0b25c; }
+    a:hover { color: #f2cd85; }
+    .leather {
+      background-color: #141b21;
+      background-image: radial-gradient(circle at 20% 30%, rgba(200,220,240,0.04) 1px, transparent 1.6px);
+      background-size: 7px 7px;
+    }
+    .blip { animation: blip 1.8s cubic-bezier(0.25, 0.6, 0.4, 1) infinite; }
+    @keyframes blip {
+      0% { transform: scale(0.9); opacity: 1; }
+      70% { transform: scale(2.2); opacity: 0; }
+      100% { transform: scale(0.9); opacity: 0; }
+    }
+    .live { animation: live 1.5s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+    @keyframes live {
+      0% { transform: scale(0.8); opacity: 0.35; }
+      50% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(0.8); opacity: 0.35; }
+    }
+    .crew { transition: background 130ms ease, transform 140ms cubic-bezier(0.3, 1.5, 0.5, 1); cursor: pointer; }
+    .crew:active { transform: scale(0.99); }
+    .ticker { animation: ticker 30s linear infinite; }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .push { transition: transform 120ms cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 120ms ease; }
+    .push:active { transform: translateY(5px); }
+    .bandin { animation: bandin 460ms cubic-bezier(0.16, 1.8, 0.36, 1) both; }
+    @keyframes bandin {
+      0% { transform: scaleY(0.2); opacity: 0; }
+      70% { transform: scaleY(1.08); opacity: 1; }
+      100% { transform: scaleY(1); opacity: 1; }
+    }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; display: flex; flex-direction: column; font-family: 'Bitter', Georgia, serif; color: #dfe8ee; background: #0c1116;">
+
+  <div class="leather" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; padding: 0 22px; border-bottom: 2px solid #060a0d;">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 20px; letter-spacing: -0.015em; color: #e0b25c;">RACE CONTROL</span>
+      <div style="width: 2px; height: 26px; background: #2a3d4a;"></div>
+      <span style="font-family: 'Bitter', Georgia, serif; font-weight: 700; font-size: 19px; color: #eef4f8;">Monsoon Reckoning</span>
+      <span style="display: flex; align-items: center; gap: 7px; padding: 5px 10px 6px; background: {{ liveBg }};">
+        <span class="live" style="width: 7px; height: 7px; border-radius: 50%; background: {{ liveDot }};"></span>
+        <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.16em; color: {{ liveDot }};">{{ liveLabel }}</span>
+      </span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 20px;">
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 1px;">
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 34px; line-height: 1; color: #f6ecd6;">0:41:18</span>
+        <span style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.18em; color: #6f8797;">SERVER CLOCK &middot; AUTHORITATIVE</span>
+      </div>
+      <div class="push" onClick="{{ toggle }}" style="display: flex; align-items: center; gap: 10px; padding: 12px 20px; background: {{ pauseBg }}; border: 2px solid {{ pauseEdge }}; border-radius: 3px; box-shadow: 0 5px 0 {{ pauseEdge }}; cursor: pointer;">
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 16px; letter-spacing: -0.005em; color: {{ pauseInk }};">{{ pauseLabel }}</span>
+      </div>
+      <div class="push" onClick="{{ hail }}" style="display: flex; align-items: center; gap: 9px; padding: 12px 16px; border: 2px solid #33475a; cursor: pointer;">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#8fa8ba" stroke-width="2.1" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 10v4h4l5 4V6l-5 4H3Z"></path>
+          <path d="M16 9a4 4 0 0 1 0 6"></path>
+        </svg>
+        <span style="font-family: 'Courier Prime', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; color: #8fa8ba;">HAIL ALL CREWS</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-grow: 1; min-height: 0;">
+
+    <div class="leather" style="width: 282px; flex-shrink: 0; display: flex; flex-direction: column; border-right: 2px solid #060a0d;">
+      <div style="padding: 14px 16px 12px; border-bottom: 2px solid #22303b; font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: #6f8797;">12 CREWS AFLOAT</div>
+      <div style="display: flex; flex-direction: column;">
+        <sc-for list="{{ crews }}" as="c" hint-placeholder-count="7">
+          <div class="crew" onClick="{{ c.tap }}" style="display: flex; align-items: center; gap: 11px; padding: 11px 16px; border-bottom: 1px solid #1b2630; border-left: 5px solid {{ c.edge }}; background: {{ c.bg }};">
+            <span style="width: 11px; height: 11px; border-radius: 50%; background: {{ c.hue }}; flex-shrink: 0; box-shadow: 0 0 9px {{ c.hue }};"></span>
+            <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-family: 'Bitter', Georgia, serif; font-weight: 700; font-size: 14px; line-height: 1.1; color: #eef4f8;">{{ c.name }}</span>
+              <span style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.1em; color: {{ c.stateInk }};">{{ c.state }}</span>
+            </div>
+            <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 18px; color: #b9cbd7; flex-shrink: 0;">{{ c.score }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="position: relative; flex-grow: 1; overflow: hidden; background: radial-gradient(120% 90% at 50% 30%, #18343f 0%, #0e1f28 55%, #070f14 100%);">
+
+      <div style="position: absolute; inset: 0; perspective: 1400px; perspective-origin: 50% 34%;">
+        <div style="position: absolute; left: 50%; top: 52%; width: 940px; height: 620px; margin: -310px 0 0 -470px; transform: rotateX(46deg) rotateZ(-3deg); transform-style: preserve-3d; background: linear-gradient(#1d3a45, #122630); border: 2px solid #2d5566; box-shadow: 0 60px 90px rgba(0,0,0,0.62), inset 0 0 80px rgba(0,0,0,0.45); opacity: {{ mapOpacity }};">
+
+          <svg viewBox="0 0 940 620" width="940" height="620" style="position: absolute; inset: 0;" aria-hidden="true">
+            <g stroke="rgba(143,190,214,0.13)" stroke-width="1" fill="none">
+              <path d="M0 78 H940 M0 156 H940 M0 234 H940 M0 312 H940 M0 390 H940 M0 468 H940 M0 546 H940"></path>
+              <path d="M94 0 V620 M188 0 V620 M282 0 V620 M376 0 V620 M470 0 V620 M564 0 V620 M658 0 V620 M752 0 V620 M846 0 V620"></path>
+            </g>
+            <g fill="none" stroke="rgba(143,190,214,0.28)" stroke-width="2.4">
+              <path d="M60 520 C 180 470, 240 380, 360 350 S 560 300, 640 210 S 800 150, 890 120"></path>
+              <path d="M120 90 C 260 140, 320 220, 470 250 S 700 330, 860 420"></path>
+            </g>
+            <g fill="rgba(224,178,92,0.16)" stroke="#e0b25c" stroke-width="2" stroke-dasharray="5 4">
+              <circle cx="300" cy="200" r="34"></circle>
+              <circle cx="560" cy="330" r="34"></circle>
+              <circle cx="740" cy="180" r="34"></circle>
+              <circle cx="430" cy="470" r="34"></circle>
+            </g>
+            <g fill="none" stroke-width="3.4" stroke-linecap="round">
+              <path d="M120 540 C 200 470, 260 300, 300 200" stroke="rgba(232,120,110,0.55)"></path>
+              <path d="M300 200 C 380 250, 470 300, 560 330" stroke="rgba(232,120,110,0.85)"></path>
+              <path d="M150 500 C 250 420, 380 400, 430 470" stroke="rgba(143,214,160,0.7)"></path>
+              <path d="M600 380 C 660 300, 700 230, 740 180" stroke="rgba(224,190,90,0.7)"></path>
+            </g>
+          </svg>
+
+          <sc-for list="{{ blips }}" as="b" hint-placeholder-count="5">
+            <div style="position: absolute; left: {{ b.x }}; top: {{ b.y }}; width: 20px; height: 20px; margin: -10px 0 0 -10px;">
+              <span class="blip" style="position: absolute; inset: 0; border-radius: 50%; background: {{ b.hue }};"></span>
+              <span style="position: absolute; left: 4px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: {{ b.hue }}; box-shadow: 0 0 14px {{ b.hue }};"></span>
+            </div>
+          </sc-for>
+
+        </div>
+      </div>
+
+      <sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}">
+        <div class="bandin" style="position: absolute; left: 0; right: 0; top: 44%; padding: 20px 0; text-align: center; background: #b8332a; border-top: 3px solid #f6a49a; border-bottom: 3px solid #f6a49a; box-shadow: 0 0 60px rgba(184,51,42,0.65);">
+          <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 38px; letter-spacing: -0.02em; line-height: 1; color: #fff3ef;">HUNT PAUSED</div>
+          <div style="font-family: 'Courier Prime', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; color: #ffc9bf; margin-top: 7px;">EVERY CLOCK IS FROZEN &middot; CREWS HAVE BEEN TOLD</div>
+        </div>
+      </sc-if>
+
+      <div style="position: absolute; left: 18px; top: 16px; display: flex; flex-direction: column; gap: 5px; padding: 12px 15px; background: rgba(10,18,24,0.82); border: 2px solid #2a3d4a;">
+        <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: #6f8797;">GROUND TRUTH</span>
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 16px; color: #f6ecd6;">IIT ROORKEE &middot; 1.6 KM</span>
+        <span style="font-family: 'Courier Prime', monospace; font-size: 9px; color: #8fa8ba;">pings every 15 s &middot; trails fade at 6 min</span>
+      </div>
+    </div>
+
+    <div class="leather" style="width: 300px; flex-shrink: 0; display: flex; flex-direction: column; border-left: 2px solid #060a0d;">
+      <div style="padding: 14px 16px 12px; border-bottom: 2px solid #22303b; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+        <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: #6f8797;">WANTS YOUR ATTENTION</span>
+        <span style="padding: 2px 8px 3px; background: #b8332a; font-family: 'Alfa Slab One', Georgia, serif; font-size: 13px; color: #fff3ef;">4</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px; padding: 13px 14px;">
+        <sc-for list="{{ alerts }}" as="a" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 13px; background: rgba(255,255,255,0.03); border: 2px solid {{ a.edge }}; border-left: 6px solid {{ a.edge }};">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+              <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.16em; color: {{ a.edge }};">{{ a.kind }}</span>
+              <span style="font-family: 'Courier Prime', monospace; font-size: 8px; color: #5f7686;">{{ a.ago }}</span>
+            </div>
+            <span style="font-family: 'Bitter', Georgia, serif; font-weight: 600; font-size: 13px; line-height: 1.4; color: #eef4f8;">{{ a.body }}</span>
+            <div style="display: flex; gap: 7px;">
+              <span class="push" onClick="{{ a.act }}" style="padding: 7px 11px; border: 2px solid #33475a; font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; color: #8fa8ba; cursor: pointer;">{{ a.cta }}</span>
+              <span onClick="{{ a.act }}" style="padding: 7px 11px; font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.08em; color: #5f7686; cursor: pointer;">DISMISS</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="leather" style="height: 46px; flex-shrink: 0; display: flex; align-items: center; overflow: hidden; border-top: 2px solid #060a0d;">
+    <span style="flex-shrink: 0; padding: 0 16px; font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: #e0b25c; border-right: 2px solid #22303b; line-height: 46px;">THE LOG</span>
+    <div style="flex-grow: 1; overflow: hidden;">
+      <div class="ticker" style="display: flex; gap: 34px; white-space: nowrap; font-family: 'Bitter', Georgia, serif; font-size: 12px; color: #8fa8ba;">
+        <span>17:42 &middot; <strong style="color: #eef4f8;">Cartographers Anonymous</strong> claimed <strong style="color: #e0b25c;">The Water Tower</strong> &mdash; first blood, +140</span>
+        <span>17:39 &middot; <strong style="color: #eef4f8;">Off The Chart</strong> bought plain words at The Sundial &mdash; 60</span>
+        <span>17:36 &middot; <strong style="color: #e8786e;">teleport flag</strong> raised on Landlubbers United &mdash; awaiting a marshal</span>
+        <span>17:31 &middot; <strong style="color: #eef4f8;">The Compass Rose</strong> took the north branch</span>
+        <span>17:42 &middot; <strong style="color: #eef4f8;">Cartographers Anonymous</strong> claimed <strong style="color: #e0b25c;">The Water Tower</strong> &mdash; first blood, +140</span>
+        <span>17:39 &middot; <strong style="color: #eef4f8;">Off The Chart</strong> bought plain words at The Sundial &mdash; 60</span>
+        <span>17:36 &middot; <strong style="color: #e8786e;">teleport flag</strong> raised on Landlubbers United &mdash; awaiting a marshal</span>
+        <span>17:31 &middot; <strong style="color: #eef4f8;">The Compass Rose</strong> took the north branch</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"$preview":{"width":1440,"height":900}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.03);
+  },
+  klaxon: function () { this.tone(190, 0.46, 'sawtooth', 0.16, 120); this.tone(150, 0.4, 'sawtooth', 0.1, 100, 0.16); },
+  release: function () { this.tone(300, 0.3, 'triangle', 0.15, 520); this.tone(620, 0.28, 'triangle', 0.12, 880, 0.13); },
+  tick: function () { this.tone(1300, 0.03, 'square', 0.055); },
+  hail: function () {
+    var self = this;
+    [392, 523.25, 659.25].forEach(function (f, i) {
+      self.tone(f, 0.3, 'triangle', 0.14, null, i * 0.1);
+    });
+  }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { paused: false, sel: 'a' };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  renderVals() {
+    var self = this;
+    var p = this.state.paused;
+    var defs = [
+      { id: 'a', name: 'Cartographers Anon.', state: '5 MARKS · MOVING', score: 1580, hue: '#e8786e', ok: true },
+      { id: 'b', name: 'The Compass Rose', state: '5 MARKS · MOVING', score: 1420, hue: '#8fd6a0', ok: true },
+      { id: 'c', name: 'Dead Reckoning', state: '4 MARKS · MOVING', score: 1320, hue: '#e0be5a', ok: true },
+      { id: 'd', name: 'The Salted Crew', state: '4 MARKS · MOVING', score: 1240, hue: '#7ab0d8', ok: true },
+      { id: 'e', name: 'Landlubbers United', state: 'FLAGGED · TELEPORT', score: 940, hue: '#c88ad8', ok: false },
+      { id: 'f', name: 'Off The Chart', state: 'STUCK 14 MIN', score: 880, hue: '#e09a5a', ok: false },
+      { id: 'g', name: 'The Long Way Round', state: '2 MARKS · MOVING', score: 640, hue: '#8ad8d0', ok: true }
+    ];
+    var crews = defs.map(function (d) {
+      var on = self.state.sel === d.id;
+      return {
+        name: d.name,
+        state: d.state,
+        score: d.score,
+        hue: d.hue,
+        stateInk: d.ok ? '#6f8797' : '#e8786e',
+        edge: on ? '#e0b25c' : 'transparent',
+        bg: on ? 'rgba(224,178,92,0.11)' : 'transparent',
+        tap: function () { self.play('tick'); self.setState({ sel: d.id }); }
+      };
+    });
+    var blips = [
+      { x: '300px', y: '200px', hue: '#e8786e' },
+      { x: '430px', y: '470px', hue: '#8fd6a0' },
+      { x: '600px', y: '380px', hue: '#e0be5a' },
+      { x: '215px', y: '330px', hue: '#7ab0d8' },
+      { x: '760px', y: '250px', hue: '#c88ad8' }
+    ];
+    var alerts = [
+      { kind: 'STUCK CREW', edge: '#e0b25c', ago: '14 min', body: 'Off The Chart has not moved from The Sundial. Three wrong site codes.', cta: 'GIFT A HINT' },
+      { kind: 'TELEPORT FLAG', edge: '#e05a4c', ago: '6 min', body: 'Landlubbers United jumped 1.2 km in 40 seconds. No pings between.', cta: 'OPEN THE TRACK' },
+      { kind: 'WEAK FIX', edge: '#7a9ab0', ago: '2 min', body: 'The Long Way Round keeps failing at the water tower. Accuracy 60 m.', cta: 'WIDEN THE FENCE' },
+      { kind: 'CREW SPLIT', edge: '#5f7686', ago: 'just now', body: 'Dead Reckoning is on two devices, 700 m apart. Probably fine.', cta: 'WATCH IT' }
+    ];
+    return {
+      crews: crews,
+      blips: blips,
+      alerts: alerts.map(function (a) {
+        return { kind: a.kind, edge: a.edge, ago: a.ago, body: a.body, cta: a.cta, act: function () { self.play('tick'); } };
+      }),
+      paused: p,
+      mapOpacity: p ? '0.3' : '1',
+      liveDot: p ? '#e0b25c' : '#8fd6a0',
+      liveBg: p ? 'rgba(224,178,92,0.16)' : 'rgba(143,214,160,0.16)',
+      liveLabel: p ? 'HELD' : 'RUNNING',
+      pauseLabel: p ? 'RESUME THE HUNT' : 'PAUSE EVERYTHING',
+      pauseBg: p ? 'linear-gradient(#4a8a5e, #2f5d3a)' : 'linear-gradient(#c8392e, #96231d)',
+      pauseEdge: p ? '#1e3f26' : '#6a120e',
+      pauseInk: p ? '#eaf6ec' : '#fff3ef',
+      toggle: function () {
+        self.play(self.state.paused ? 'release' : 'klaxon');
+        self.setState({ paused: !self.state.paused });
+      },
+      hail: function () { self.play('hail'); }
+    };
+  }
+}
+</script>
+</body>
+</html>

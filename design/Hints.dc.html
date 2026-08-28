@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bitter:ital,wght@0,400;0,600;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #1a1410; }
+    a { color: #b8332a; }
+    a:hover { color: #7d1c16; }
+    .grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.5; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.36'/%3E%3C/svg%3E");
+    }
+    .strip { transition: transform 140ms cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 140ms ease; cursor: pointer; }
+    .strip:active { transform: translateY(3px); box-shadow: 0 1px 0 #97815a; }
+    .unfurl { animation: unfurl 420ms cubic-bezier(0.2, 1.5, 0.35, 1) both; }
+    @keyframes unfurl {
+      0% { opacity: 0; transform: translateY(-10px) scaleY(0.5); transform-origin: top; }
+      70% { opacity: 1; transform: translateY(0) scaleY(1.06); transform-origin: top; }
+      100% { opacity: 1; transform: translateY(0) scaleY(1); transform-origin: top; }
+    }
+    .sheetup { animation: sheetup 560ms cubic-bezier(0.2, 1.25, 0.3, 1) both; }
+    @keyframes sheetup {
+      0% { transform: translateY(80px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .push { transition: transform 120ms cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 120ms ease; }
+    .push:active { transform: translateY(5px); box-shadow: 0 0 0 #1a120b; }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #14100c; font-family: 'Bitter', Georgia, serif; color: #241a12; display: flex; flex-direction: column;">
+
+  <div style="position: relative; height: 148px; flex-shrink: 0; overflow: hidden; background: radial-gradient(120% 90% at 30% 10%, #f0e4c6 0%, #d5c6a4 60%, #bfae88 100%);">
+    <div class="grain"></div>
+    <div style="position: relative; padding: 22px 20px 0; display: flex; justify-content: space-between; align-items: flex-start; filter: blur(0.6px);">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 21px; letter-spacing: -0.012em; color: #241a12;">Monsoon Reckoning</div>
+        <div style="font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.17em; color: #7a6749;">LEG 3 OF 7 &middot; THE SALTED CREW</div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 6px 12px 8px; background: linear-gradient(#e0b25c, #a67c2c); border: 1.5px solid #64460f; border-radius: 3px;">
+        <div style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.2em; color: #4a3208;">SPOILS</div>
+        <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 22px; line-height: 0.92; color: #2b1c06;">{{ score }}</div>
+      </div>
+    </div>
+    <div style="position: relative; margin: 14px 22px 0; font-family: 'Bitter', Georgia, serif; font-weight: 600; font-size: 16px; line-height: 1.35; color: #5d4a30; filter: blur(0.7px);">Where the iron bird has kept her watch above the quadrangle&hellip;</div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(rgba(20,16,12,0.32), rgba(20,16,12,0.74));"></div>
+  </div>
+
+  <div class="sheetup" style="position: relative; flex-grow: 1; display: flex; flex-direction: column; background: radial-gradient(120% 60% at 50% 0%, #f4e8ca 0%, #e2d3af 50%, #cdbc95 100%); border-top: 3px solid #8a7351; box-shadow: 0 -16px 34px rgba(0,0,0,0.6);">
+    <div class="grain"></div>
+
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 13px; padding: 14px 24px 18px;">
+      <div style="width: 80px; height: 8px; border-radius: 4px; background: repeating-linear-gradient(45deg, #9c7f57 0 4px, #7e6440 4px 8px); box-shadow: inset 0 1px 0 rgba(255,240,210,0.4);"></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 32px; letter-spacing: -0.02em; color: #241a12; line-height: 1;">THE INFORMANT</div>
+        <div style="font-family: 'Bitter', Georgia, serif; font-style: italic; font-weight: 500; font-size: 17px; color: #b8332a;">he does not work for free</div>
+      </div>
+    </div>
+
+    <div style="position: relative; display: flex; flex-direction: column; gap: 10px; padding: 0 18px;">
+
+      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="4">
+        <div class="strip" onClick="{{ t.buy }}" style="position: relative; padding: 13px 15px 14px; background: {{ t.bg }}; border: 2px solid #a8946c; border-left: 6px solid {{ t.edge }}; box-shadow: 0 4px 0 #97815a;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+            <div style="display: flex; flex-direction: column; gap: 3px;">
+              <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 17px; letter-spacing: -0.01em; color: #241a12; line-height: 1.05;">{{ t.name }}</div>
+              <div style="font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.1em; color: #7a6749;">{{ t.note }}</div>
+            </div>
+            <div style="flex-shrink: 0; padding: 6px 11px 7px; background: {{ t.pillBg }}; border: 1.5px solid {{ t.edge }};">
+              <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 16px; color: {{ t.pillInk }};">{{ t.cost }}</span>
+            </div>
+          </div>
+          <sc-if value="{{ t.open }}" hint-placeholder-val="{{ true }}">
+            <div class="unfurl" style="margin-top: 12px; padding: 11px 13px 12px; background: rgba(255,250,235,0.72); border: 1px dashed #b0996d;">
+              <div style="font-family: 'Bitter', Georgia, serif; font-weight: 600; font-size: 16px; line-height: 1.4; color: #2b2118;">{{ t.text }}</div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+
+    </div>
+
+    <div style="position: relative; margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px 26px; border-top: 2px solid rgba(138,115,81,0.55);">
+      <div style="display: flex; flex-direction: column; gap: 3px;">
+        <div style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.18em; color: #7a6749;">LEDGER THIS LEG</div>
+        <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 19px; color: {{ ledgerInk }};">{{ ledger }}</div>
+      </div>
+      <div class="push" onClick="{{ close }}" style="display: flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 20px; background: linear-gradient(#3a2a19, #241708); border: 2px solid #120c05; border-radius: 3px; box-shadow: 0 5px 0 #1a120b; cursor: pointer;">
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 16px; letter-spacing: -0.005em; color: #f6ecd6;">BACK TO THE HUNT</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"$preview":{"width":390,"height":844}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.03);
+  },
+  noise: function (dur, freq, q, vol) {
+    var c = this.ac();
+    if (!c) { return; }
+    var n = Math.floor(c.sampleRate * dur);
+    var b = c.createBuffer(1, n, c.sampleRate);
+    var d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) { d[i] = (Math.random() * 2 - 1) * (1 - i / n); }
+    var s = c.createBufferSource();
+    s.buffer = b;
+    var f = c.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = freq;
+    f.Q.value = q || 1;
+    var g = c.createGain();
+    g.gain.value = vol || 0.2;
+    s.connect(f);
+    f.connect(g);
+    g.connect(c.destination);
+    s.start();
+  },
+  tear: function () { this.noise(0.28, 3200, 0.5, 0.18); this.tone(340, 0.11, 'sawtooth', 0.05, 180); },
+  coinDown: function () { this.tone(440, 0.18, 'triangle', 0.17, 180); },
+  thunk: function () { this.tone(118, 0.15, 'sine', 0.3, 56); }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: {}, score: 1240, spent: 0 };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  renderVals() {
+    var self = this;
+    var defs = [
+      { id: 'nudge', name: 'A NUDGE', note: 'A direction, nothing more', cost: 10, edge: '#7a6749', text: 'You are looking too high. Bring your eyes down to the ground.' },
+      { id: 'hint', name: 'A HINT', note: 'Narrows the ground considerably', cost: 30, edge: '#b8873a', text: 'It is a plaque, not a building. Brass, and older than the paint around it.' },
+      { id: 'plain', name: 'PLAIN WORDS', note: 'He tells you outright', cost: 60, edge: '#b8332a', text: 'North face of the Civil block, left of the arch, at knee height.' },
+      { id: 'skip', name: 'ABANDON THE MARK', note: 'Move on. It costs you dearly', cost: 150, edge: '#6a120e', text: 'The mark is struck from your chart. The next one is already yours.' }
+    ];
+    var tiers = defs.map(function (d) {
+      var isOpen = !!self.state.open[d.id];
+      return {
+        name: d.name,
+        note: d.note,
+        cost: isOpen ? 'PAID' : '-' + d.cost,
+        edge: d.edge,
+        text: d.text,
+        open: isOpen,
+        bg: isOpen ? 'linear-gradient(#f8eed4, #ecdfbe)' : 'linear-gradient(#ece0bf, #dccca6)',
+        pillBg: isOpen ? d.edge : 'rgba(255,250,235,0.6)',
+        pillInk: isOpen ? '#fbeeda' : d.edge,
+        buy: function () {
+          if (self.state.open[d.id]) { self.play('thunk'); return; }
+          self.play('tear');
+          setTimeout(function () { self.play('coinDown'); }, 140);
+          var nextOpen = Object.assign({}, self.state.open);
+          nextOpen[d.id] = true;
+          self.setState({ open: nextOpen, score: self.state.score - d.cost, spent: self.state.spent + d.cost });
+        }
+      };
+    });
+    return {
+      tiers: tiers,
+      score: this.state.score,
+      ledger: this.state.spent === 0 ? 'NOTHING OWED' : '-' + this.state.spent + ' SPOILS',
+      ledgerInk: this.state.spent === 0 ? '#7a6749' : '#b8332a',
+      close: function () { self.play('thunk'); }
+    };
+  }
+}
+</script>
+</body>
+</html>

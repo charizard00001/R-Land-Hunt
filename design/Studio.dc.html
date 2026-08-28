@@ -1,0 +1,341 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bitter:ital,wght@0,400;0,600;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #17120d; }
+    a { color: #e0b25c; }
+    a:hover { color: #f2cd85; }
+    .cork {
+      background-color: #ab7540;
+      background-image:
+        radial-gradient(circle at 30% 30%, rgba(255,224,180,0.18) 1px, transparent 1.7px),
+        radial-gradient(circle at 70% 70%, rgba(58,30,10,0.24) 1px, transparent 1.7px),
+        radial-gradient(circle at 50% 10%, rgba(255,230,190,0.11) 1px, transparent 1.4px);
+      background-size: 9px 9px, 13px 13px, 17px 17px;
+    }
+    .card { transition: transform 150ms cubic-bezier(0.28, 1.6, 0.45, 1), box-shadow 150ms ease; cursor: pointer; }
+    .card:hover { filter: brightness(1.05); }
+    .card:active { transform: scale(0.97); }
+    .leather {
+      background-color: #241a12;
+      background-image: radial-gradient(circle at 20% 30%, rgba(255,220,170,0.05) 1px, transparent 1.6px);
+      background-size: 7px 7px;
+    }
+    .chip { transition: background 130ms ease, border-color 130ms ease, transform 120ms cubic-bezier(0.3, 1.5, 0.5, 1); cursor: pointer; }
+    .chip:active { transform: scale(0.96); }
+    .push { transition: transform 120ms cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 120ms ease; }
+    .push:active { transform: translateY(5px); box-shadow: 0 0 0 #5c400f; }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; display: flex; flex-direction: column; font-family: 'Bitter', Georgia, serif; color: #ecdcb6; background: #17120d;">
+
+  <div class="leather" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 68px; padding: 0 22px; border-bottom: 2px solid #0d0906; box-shadow: 0 3px 12px rgba(0,0,0,0.55);">
+    <div style="display: flex; align-items: center; gap: 18px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="#e0b25c" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z"></path>
+          <path d="M9 3v15M15 6v15"></path>
+        </svg>
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 19px; letter-spacing: -0.012em; color: #f6ecd6;">HUNT STUDIO</span>
+      </div>
+      <div style="width: 2px; height: 26px; background: #3d2f20;"></div>
+      <div style="display: flex; align-items: center; gap: 11px;">
+        <span style="font-family: 'Bitter', Georgia, serif; font-weight: 700; font-size: 19px; color: #f0e2bd;">Monsoon Reckoning</span>
+        <span style="padding: 4px 9px 5px; background: #8a6a2c; font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.16em; color: #ffeec6;">DRAFT</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 11px;">
+      <div class="chip" onClick="{{ ping }}" style="display: flex; align-items: center; gap: 8px; padding: 10px 15px; border: 2px solid #4a3826; font-family: 'Courier Prime', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; color: #c8b48c;">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#c8b48c" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <path d="M8 5l11 7-11 7V5Z"></path>
+        </svg>
+        DRY RUN
+      </div>
+      <div class="push" onClick="{{ publish }}" style="display: flex; align-items: center; gap: 10px; padding: 11px 20px; background: linear-gradient(#e0b25c, #a67c2c); border: 2px solid #64460f; border-radius: 3px; box-shadow: inset 0 2px 0 rgba(255,248,220,0.55), 0 5px 0 #5c400f; cursor: pointer;">
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 16px; letter-spacing: -0.005em; color: #2b1c06;">SEAL &amp; PUBLISH</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-grow: 1; min-height: 0;">
+
+    <div class="leather" style="width: 228px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px; padding: 20px 16px; border-right: 2px solid #0d0906;">
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: #8a7148;">DROP ONTO THE BOARD</span>
+        <sc-for list="{{ tools }}" as="t" hint-placeholder-count="5">
+          <div class="chip" onClick="{{ t.tap }}" style="display: flex; align-items: center; gap: 10px; padding: 10px 11px; border: 2px dashed #4a3826; color: #d8c8a2;">
+            <span style="width: 11px; height: 11px; border-radius: 50%; background: {{ t.dot }}; flex-shrink: 0; box-shadow: inset 0 1.5px 2px rgba(255,255,255,0.5);"></span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.08em;">{{ t.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="height: 2px; background: #3d2f20;"></div>
+      <div style="display: flex; flex-direction: column; gap: 11px;">
+        <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: #8a7148;">THE CHART SO FAR</span>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px;">
+          <div style="display: flex; flex-direction: column; gap: 2px; padding: 11px 12px 12px; background: rgba(224,178,92,0.1); border: 1px solid #4a3826;">
+            <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 22px; line-height: 1; color: #e0b25c;">6</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.12em; color: #a08a63;">MARKS</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; padding: 11px 12px 12px; background: rgba(224,178,92,0.1); border: 1px solid #4a3826;">
+            <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 22px; line-height: 1; color: #8fd6a0;">2</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.12em; color: #a08a63;">BRANCHES</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; padding: 11px 12px 12px; background: rgba(224,178,92,0.1); border: 1px solid #4a3826;">
+            <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 22px; line-height: 1; color: #ecdcb6;">2.9</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.12em; color: #a08a63;">KM</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; padding: 11px 12px 12px; background: rgba(224,178,92,0.1); border: 1px solid #4a3826;">
+            <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 22px; line-height: 1; color: #ecdcb6;">54</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.12em; color: #a08a63;">MIN EST.</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: auto; padding: 12px 13px; background: #b8332a; box-shadow: 0 4px 0 #7d1c16;">
+        <div style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; color: #fbeeda; line-height: 1.7;">2 MARKS HAVE NO<br>PROOF POLICY SET</div>
+      </div>
+    </div>
+
+    <div class="cork" style="position: relative; flex-grow: 1; overflow: hidden; box-shadow: inset 0 0 60px rgba(60,30,10,0.5);">
+
+      <svg viewBox="0 0 852 832" width="100%" height="100%" style="position: absolute; inset: 0;" aria-hidden="true">
+        <g fill="none" stroke="#8d2a22" stroke-width="3.4" stroke-linecap="round" opacity="0.95">
+          <path d="M206 384 C 250 340, 268 232, 310 214"></path>
+          <path d="M206 396 C 254 470, 262 540, 310 564"></path>
+          <path d="M480 214 C 528 236, 520 330, 566 372"></path>
+          <path d="M480 564 C 528 542, 520 434, 566 392"></path>
+          <path d="M736 384 C 776 350, 782 232, 826 214" opacity="0.35"></path>
+        </g>
+        <g fill="none" stroke="rgba(255,200,190,0.32)" stroke-width="1.1">
+          <path d="M206 382 C 250 338, 268 230, 310 212"></path>
+          <path d="M206 394 C 254 468, 262 538, 310 562"></path>
+        </g>
+      </svg>
+
+      <sc-for list="{{ nodes }}" as="n" hint-placeholder-count="6">
+        <div class="card" onClick="{{ n.tap }}" style="position: absolute; left: {{ n.x }}; top: {{ n.y }}; width: 174px; padding: 13px 13px 14px; background: {{ n.bg }}; border: 2px solid #a8946c; transform: {{ n.tilt }}; box-shadow: {{ n.shadow }};">
+          <div style="position: absolute; left: 50%; top: -10px; width: 19px; height: 19px; margin-left: -9px; border-radius: 50%; background: {{ n.pin }}; box-shadow: 0 3px 5px rgba(40,16,6,0.6), inset 0 2px 3px rgba(255,255,255,0.5);"></div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
+            <span style="padding: 3px 7px 4px; background: {{ n.kindBg }}; font-family: 'Courier Prime', monospace; font-size: 8px; font-weight: 700; letter-spacing: 0.14em; color: {{ n.kindInk }};">{{ n.kind }}</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.1em; color: #8a7351;">{{ n.pts }}</span>
+          </div>
+          <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 15px; letter-spacing: -0.012em; color: #241a12; line-height: 1.12; margin-bottom: 6px;">{{ n.title }}</div>
+          <div style="font-family: 'Bitter', Georgia, serif; font-style: italic; font-weight: 500; font-size: 13px; line-height: 1.3; color: #6b5738;">{{ n.note }}</div>
+        </div>
+      </sc-for>
+
+      <div style="position: absolute; right: 16px; bottom: 14px; display: flex; align-items: center; gap: 10px; padding: 8px 13px; background: rgba(36,23,8,0.8); border: 1px solid rgba(224,178,92,0.35);">
+        <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: #e0b25c;">DRAG A CARD TO MOVE &middot; DRAG A PIN TO STRING</span>
+      </div>
+
+    </div>
+
+    <div class="leather" style="width: 356px; flex-shrink: 0; display: flex; flex-direction: column; border-left: 2px solid #0d0906;">
+
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px 18px 15px; border-bottom: 2px solid #3d2f20;">
+        <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 17px; letter-spacing: -0.012em; color: #f6ecd6;">{{ sel.title }}</span>
+        <span style="padding: 3px 8px 4px; background: {{ sel.kindBg }}; font-family: 'Courier Prime', monospace; font-size: 8px; font-weight: 700; letter-spacing: 0.14em; color: {{ sel.kindInk }};">{{ sel.kind }}</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 17px; padding: 16px 18px;">
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: #8a7148;">THE CLUE AS WRITTEN</span>
+          <div style="padding: 13px 14px; background: #f4e9cc; border: 2px solid #7d6a48; font-family: 'Bitter', Georgia, serif; font-weight: 600; font-size: 15px; line-height: 1.4; color: #241a12;">{{ sel.clue }}</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: #8a7148;">THE GROUND IT COVERS</span>
+          <div style="position: relative; height: 154px; background: linear-gradient(#233b30, #16261f); border: 2px solid #3d2f20; overflow: hidden;">
+            <svg viewBox="0 0 316 154" width="100%" height="154" style="display: block;" aria-hidden="true">
+              <g stroke="rgba(224,178,92,0.16)" stroke-width="1" fill="none">
+                <path d="M0 38 H316 M0 77 H316 M0 116 H316 M79 0 V154 M158 0 V154 M237 0 V154"></path>
+              </g>
+              <path d="M22 126 L96 94 L150 106 L212 60 L298 38" fill="none" stroke="rgba(224,178,92,0.35)" stroke-width="1.8"></path>
+              <circle cx="158" cy="77" r="44" fill="rgba(184,51,42,0.2)" stroke="#e05a4c" stroke-width="2.2" stroke-dasharray="5 4"></circle>
+              <circle cx="158" cy="77" r="5" fill="#e05a4c"></circle>
+            </svg>
+            <div style="position: absolute; left: 10px; bottom: 8px; font-family: 'Courier Prime', monospace; font-size: 8px; letter-spacing: 0.12em; color: #9db3a6;">29.8650, 77.8966</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; color: #a08a63; flex-shrink: 0;">RADIUS</span>
+            <div style="position: relative; flex-grow: 1; height: 6px; background: #3d2f20;">
+              <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 34%; background: #e0b25c;"></div>
+              <div style="position: absolute; left: 34%; top: 50%; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: #f6ecd6; border: 2px solid #64460f; box-shadow: 0 2px 4px rgba(0,0,0,0.6);"></div>
+            </div>
+            <span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 16px; color: #f6ecd6; flex-shrink: 0;">25m</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 9px;">
+          <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: #8a7148;">HOW THEY MUST PROVE IT</span>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px;">
+            <sc-for list="{{ proofs }}" as="p" hint-placeholder-count="4">
+              <div class="chip" onClick="{{ p.tap }}" style="display: flex; align-items: center; gap: 8px; padding: 10px 11px; border: 2px solid {{ p.edge }}; background: {{ p.bg }}; color: {{ p.ink }};">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: {{ p.dot }}; flex-shrink: 0;"></span>
+                <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.08em;">{{ p.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 9px;">
+          <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.22em; color: #8a7148;">THE INFORMANT SELLS</span>
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <div style="display: flex; justify-content: space-between; gap: 10px; padding: 8px 11px; border-left: 5px solid #7a6749; background: rgba(255,240,205,0.06); font-family: 'Courier Prime', monospace; font-size: 10px; color: #d8c8a2;"><span>A NUDGE</span><span style="color: #e8786e; font-weight: 700;">-10</span></div>
+            <div style="display: flex; justify-content: space-between; gap: 10px; padding: 8px 11px; border-left: 5px solid #b8873a; background: rgba(255,240,205,0.06); font-family: 'Courier Prime', monospace; font-size: 10px; color: #d8c8a2;"><span>A HINT</span><span style="color: #e8786e; font-weight: 700;">-30</span></div>
+            <div style="display: flex; justify-content: space-between; gap: 10px; padding: 8px 11px; border-left: 5px solid #b8332a; background: rgba(255,240,205,0.06); font-family: 'Courier Prime', monospace; font-size: 10px; color: #d8c8a2;"><span>PLAIN WORDS</span><span style="color: #e8786e; font-weight: 700;">-60</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"$preview":{"width":1440,"height":900}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.03);
+  },
+  noise: function (dur, freq, q, vol) {
+    var c = this.ac();
+    if (!c) { return; }
+    var n = Math.floor(c.sampleRate * dur);
+    var b = c.createBuffer(1, n, c.sampleRate);
+    var d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) { d[i] = (Math.random() * 2 - 1) * (1 - i / n); }
+    var s = c.createBufferSource();
+    s.buffer = b;
+    var f = c.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = freq;
+    f.Q.value = q || 1;
+    var g = c.createGain();
+    g.gain.value = vol || 0.2;
+    s.connect(f);
+    f.connect(g);
+    g.connect(c.destination);
+    s.start();
+  },
+  pin: function () { this.tone(260, 0.05, 'square', 0.07, 150); this.noise(0.05, 2600, 1.4, 0.1); },
+  stamp: function () { this.tone(72, 0.26, 'triangle', 0.42, 38); this.noise(0.08, 1700, 1.1, 0.24); },
+  tick: function () { this.tone(1300, 0.03, 'square', 0.055); }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sel: 'n2', proof: 'code' };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  renderVals() {
+    var self = this;
+    var defs = [
+      { id: 'n1', x: 36, y: 330, kind: 'START', title: 'CAST OFF', note: 'the lawn by the main gate', pts: '0 PTS', pin: 'radial-gradient(circle at 34% 28%, #a8e8b8, #2f5d3a)', kindBg: '#2f5d3a', kindInk: '#eaf6ec', tilt: 'rotate(-1.6deg)' },
+      { id: 'n2', x: 310, y: 150, kind: 'RIDDLE', title: 'THE IRON BIRD', note: 'plaque, north face, knee height', pts: '100 PTS', pin: 'radial-gradient(circle at 34% 28%, #f6a49a, #96231d)', kindBg: '#b8332a', kindInk: '#fbeeda', tilt: 'rotate(1.4deg)' },
+      { id: 'n3', x: 310, y: 500, kind: 'CIPHER', title: 'THE SUNDIAL', note: 'shadow at four', pts: '100 PTS', pin: 'radial-gradient(circle at 34% 28%, #f8d89a, #8a6a2c)', kindBg: '#8a6a2c', kindInk: '#ffeec6', tilt: 'rotate(-2.2deg)' },
+      { id: 'n4', x: 566, y: 328, kind: 'GATE', title: 'ANY 2 OF 3', note: 'opens the far half of the chart', pts: 'BONUS 50', pin: 'radial-gradient(circle at 34% 28%, #b8d8f8, #24507f)', kindBg: '#24507f', kindInk: '#e2f0ff', tilt: 'rotate(0.8deg)' },
+      { id: 'n5', x: 640, y: 118, kind: 'PHOTO', title: 'THE WATER TOWER', note: 'all four of you in frame', pts: '140 PTS', pin: 'radial-gradient(circle at 34% 28%, #f6a49a, #96231d)', kindBg: '#b8332a', kindInk: '#fbeeda', tilt: 'rotate(-1deg)' },
+      { id: 'n6', x: 640, y: 540, kind: 'FINAL', title: 'THE RECKONING', note: 'where it all began, at dusk', pts: '300 PTS', pin: 'radial-gradient(circle at 34% 28%, #e2c8f8, #5a2f7f)', kindBg: '#5a2f7f', kindInk: '#f0e4ff', tilt: 'rotate(1.9deg)' }
+    ];
+    var clues = {
+      n1: 'Gather at the gate. The chart opens when the bell sounds.',
+      n2: 'Where the iron bird has kept her watch above the quadrangle since forty-seven, count the steps beneath her wing.',
+      n3: 'The old stone tells the hour without a hand. Stand where its shadow points when the day turns.',
+      n4: 'Two marks of three will open the far water.',
+      n5: 'Climb no higher than the fence. The tower has seen every crew that came before you.',
+      n6: 'Return to where you cast off. Bring everything you took.'
+    };
+    var nodes = defs.map(function (d) {
+      var on = self.state.sel === d.id;
+      return {
+        x: d.x + 'px',
+        y: d.y + 'px',
+        kind: d.kind,
+        kindBg: d.kindBg,
+        kindInk: d.kindInk,
+        title: d.title,
+        note: d.note,
+        pts: d.pts,
+        pin: d.pin,
+        bg: on ? 'linear-gradient(#fdf6e2, #f2e6c6)' : 'linear-gradient(#f4ecd4, #e5d8b6)',
+        tilt: on ? d.tilt + ' scale(1.06)' : d.tilt,
+        shadow: on ? '0 18px 32px rgba(40,18,6,0.55), 0 0 0 3px #b8332a' : '0 6px 0 #8d7a56, 0 10px 18px rgba(40,18,6,0.34)',
+        tap: function () { self.play('pin'); self.setState({ sel: d.id }); }
+      };
+    });
+    var cur = defs.filter(function (d) { return d.id === self.state.sel; })[0] || defs[1];
+    var proofDefs = [
+      { id: 'gps', label: 'GPS ONLY', dot: '#7a9ab0' },
+      { id: 'code', label: 'GPS + CODE', dot: '#e0b25c' },
+      { id: 'photo', label: 'GPS + PHOTO', dot: '#e05a4c' },
+      { id: 'qr', label: 'QR FALLBACK', dot: '#8fd6a0' }
+    ];
+    var proofs = proofDefs.map(function (p) {
+      var on = self.state.proof === p.id;
+      return {
+        label: p.label,
+        dot: p.dot,
+        edge: on ? '#e0b25c' : '#4a3826',
+        bg: on ? 'rgba(224,178,92,0.18)' : 'transparent',
+        ink: on ? '#f6ecd6' : '#8a7351',
+        tap: function () { self.play('tick'); self.setState({ proof: p.id }); }
+      };
+    });
+    return {
+      nodes: nodes,
+      proofs: proofs,
+      sel: { title: cur.title, kind: cur.kind, kindBg: cur.kindBg, kindInk: cur.kindInk, clue: clues[cur.id] },
+      tools: [
+        { label: 'RIDDLE CARD', dot: '#e05a4c', tap: function () { self.play('pin'); } },
+        { label: 'PHOTO MARK', dot: '#e0b25c', tap: function () { self.play('pin'); } },
+        { label: 'CIPHER LOCK', dot: '#8fd6a0', tap: function () { self.play('pin'); } },
+        { label: 'BRANCH GATE', dot: '#7a9ab0', tap: function () { self.play('pin'); } },
+        { label: 'STICKY NOTE', dot: '#d8b8f0', tap: function () { self.play('pin'); } }
+      ],
+      publish: function () { self.play('stamp'); },
+      ping: function () { self.play('tick'); }
+    };
+  }
+}
+</script>
+</body>
+</html>

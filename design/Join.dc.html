@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bitter:ital,wght@0,400;0,600;0,700;1,500&family=Courier+Prime:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; background: #cfc0a0; }
+    a { color: #b8332a; }
+    a:hover { color: #7d1c16; }
+    .grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.5; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.36'/%3E%3C/svg%3E");
+    }
+    .seal { transition: transform 130ms cubic-bezier(0.3, 1.5, 0.5, 1), filter 130ms ease; }
+    .seal:active { transform: scale(0.9) translateY(5px); filter: brightness(0.92); }
+    .breathe { animation: breathe 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.055); }
+      100% { transform: scale(1); }
+    }
+    .halfL { animation: crackL 760ms cubic-bezier(0.25, 1.4, 0.4, 1) both; }
+    .halfR { animation: crackR 760ms cubic-bezier(0.25, 1.4, 0.4, 1) both; }
+    @keyframes crackL {
+      0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateX(-78px) rotate(-46deg) translateY(30px); opacity: 0; }
+    }
+    @keyframes crackR {
+      0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateX(78px) rotate(46deg) translateY(30px); opacity: 0; }
+    }
+    .rise { animation: rise 560ms cubic-bezier(0.2, 1.55, 0.4, 1) both; }
+    @keyframes rise {
+      0% { transform: translateY(22px) scale(0.92); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .pop { animation: popin 480ms cubic-bezier(0.16, 1.8, 0.36, 1) both; }
+    @keyframes popin {
+      0% { transform: scale(0.4); opacity: 0; }
+      60% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .caret { animation: blink 1s step-end infinite; }
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: radial-gradient(130% 70% at 50% 0%, #f0e4c6 0%, #dccfae 46%, #bfad86 100%); font-family: 'Bitter', Georgia, serif; color: #241a12; display: flex; flex-direction: column;">
+
+  <div class="grain"></div>
+
+  <div style="position: absolute; left: 0; right: 0; top: 0; height: 100%; opacity: 0.13; pointer-events: none;">
+    <svg viewBox="0 0 390 844" width="390" height="844" aria-hidden="true" fill="none" stroke="#5d4a30" stroke-width="1">
+      <path d="M-10 620 C 80 596, 150 664, 236 638 S 350 600, 400 646"></path>
+      <path d="M-10 648 C 90 624, 160 692, 246 664 S 352 628, 400 672"></path>
+      <path d="M-10 676 C 100 652, 170 720, 256 690 S 356 656, 400 698"></path>
+    </svg>
+  </div>
+
+  <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 50px 28px 0;">
+    <div style="width: 100px; height: 3px; background: #241a12;"></div>
+    <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 42px; letter-spacing: -0.02em; line-height: 0.98; color: #241a12; text-align: center;">R-LAND<br>HUNT</div>
+    <div style="display: inline-block; padding: 5px 13px 6px; background: #b8332a;">
+      <span style="font-family: 'Courier Prime', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.28em; color: #fbeeda;">SEALED ORDERS</span>
+    </div>
+  </div>
+
+  <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 32px 28px 0;">
+    <div style="font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.22em; color: #6b5738;">ENTER THE CIPHER FROM YOUR CAPTAIN</div>
+    <div style="display: flex; gap: 8px;">
+      <div style="width: 44px; height: 58px; display: flex; align-items: center; justify-content: center; background: linear-gradient(#f8eed4, #e4d5b0); border: 2px solid #a8946c; box-shadow: 0 3px 0 #97815a; font-family: 'Alfa Slab One', Georgia, serif; font-size: 25px; color: #241a12;">R</div>
+      <div style="width: 44px; height: 58px; display: flex; align-items: center; justify-content: center; background: linear-gradient(#f8eed4, #e4d5b0); border: 2px solid #a8946c; box-shadow: 0 3px 0 #97815a; font-family: 'Alfa Slab One', Georgia, serif; font-size: 25px; color: #241a12;">L</div>
+      <div style="width: 44px; height: 58px; display: flex; align-items: center; justify-content: center; background: linear-gradient(#f8eed4, #e4d5b0); border: 2px solid #a8946c; box-shadow: 0 3px 0 #97815a; font-family: 'Alfa Slab One', Georgia, serif; font-size: 25px; color: #241a12;">4</div>
+      <div style="width: 44px; height: 58px; display: flex; align-items: center; justify-content: center; background: linear-gradient(#f8eed4, #e4d5b0); border: 2px solid #a8946c; box-shadow: 0 3px 0 #97815a; font-family: 'Alfa Slab One', Georgia, serif; font-size: 25px; color: #241a12;">K</div>
+      <div style="width: 44px; height: 58px; display: flex; align-items: center; justify-content: center; background: linear-gradient(#f2e6c8, #dfd0a8); border: 2px solid #b8332a; box-shadow: 0 3px 0 #8d2019;"><span class="caret" style="width: 3px; height: 26px; background: #b8332a;"></span></div>
+      <div style="width: 44px; height: 58px; background: linear-gradient(#eadfc0, #d8caa4); border: 2px solid #b4a179; box-shadow: 0 3px 0 #a08c64;"></div>
+    </div>
+  </div>
+
+  <div style="position: relative; flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;">
+
+    <sc-if value="{{ sealed }}" hint-placeholder-val="{{ true }}">
+      <div class="seal" onClick="{{ crack }}" style="position: relative; width: 172px; height: 172px; cursor: pointer;">
+        <div class="breathe" style="position: absolute; inset: 0; perspective: 600px;">
+          <div style="position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 33% 26%, #e05a4c, #b8332a 52%, #6a120e 100%); box-shadow: inset 0 5px 14px rgba(255,200,188,0.48), inset 0 -9px 20px rgba(40,6,4,0.66), 0 14px 28px rgba(70,16,12,0.48); transform: rotateX(16deg);"></div>
+          <svg viewBox="0 0 172 172" width="172" height="172" style="position: absolute; inset: 0;" aria-hidden="true">
+            <circle cx="86" cy="86" r="64" fill="none" stroke="rgba(255,210,196,0.38)" stroke-width="2.4"></circle>
+            <path d="M86 34 L97 68 L133 68 L104 89 L115 124 L86 103 L57 124 L68 89 L39 68 L75 68 Z" fill="none" stroke="rgba(255,220,206,0.7)" stroke-width="3.4" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 24px; letter-spacing: -0.01em; color: #241a12;">BREAK THE SEAL</div>
+        <div style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.2em; color: #7a6749;">ONE PRESS. THAT IS ALL IT TAKES.</div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ opened }}" hint-placeholder-val="{{ false }}">
+      <div style="position: relative; width: 172px; height: 172px;">
+        <div class="halfL" style="position: absolute; left: 0; top: 0; width: 86px; height: 172px; overflow: hidden;">
+          <div style="width: 172px; height: 172px; border-radius: 50%; background: radial-gradient(circle at 33% 26%, #e05a4c, #b8332a 52%, #6a120e 100%);"></div>
+        </div>
+        <div class="halfR" style="position: absolute; left: 86px; top: 0; width: 86px; height: 172px; overflow: hidden;">
+          <div style="width: 172px; height: 172px; margin-left: -86px; border-radius: 50%; background: radial-gradient(circle at 33% 26%, #e05a4c, #b8332a 52%, #6a120e 100%);"></div>
+        </div>
+        <div class="pop" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;">
+          <div style="display: flex; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 50%; background: #2f5d3a; box-shadow: 0 6px 0 #1e3f26, 0 12px 20px rgba(30,63,38,0.4);">
+            <svg viewBox="0 0 64 64" width="42" height="42" fill="none" stroke="#eaf6ec" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 34 L26 48 L52 18"></path>
+            </svg>
+          </div>
+          <div style="font-family: 'Alfa Slab One', Georgia, serif; font-size: 18px; color: #2f5d3a;">ADMITTED</div>
+        </div>
+      </div>
+      <div class="rise" style="width: 300px; padding: 16px 18px 18px; background: linear-gradient(#f6ecd0, #e6d8b4); border: 2px solid #a8946c; transform: rotate(0.6deg); box-shadow: 0 5px 0 #97815a, 0 12px 20px rgba(45,30,14,0.24);">
+        <div style="display: inline-block; padding: 3px 9px 4px; background: #b8332a; margin-bottom: 11px;">
+          <span style="font-family: 'Courier Prime', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; color: #fbeeda;">CREW MANIFEST</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+            <span style="font-family: 'Bitter', Georgia, serif; font-weight: 700; font-size: 16px; color: #241a12;">Ishani R.</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.16em; color: #b8332a;">CAPTAIN</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+            <span style="font-family: 'Bitter', Georgia, serif; font-weight: 600; font-size: 16px; color: #241a12;">Devansh K.</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.16em; color: #7a6749;">ABOARD</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+            <span style="font-family: 'Bitter', Georgia, serif; font-weight: 600; font-size: 16px; color: #241a12;">Meera T.</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.16em; color: #7a6749;">ABOARD</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; opacity: 0.5;">
+            <span style="font-family: 'Bitter', Georgia, serif; font-style: italic; font-weight: 500; font-size: 16px; color: #241a12;">one berth open</span>
+            <span style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.16em; color: #7a6749;">SHARE CIPHER</span>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+
+  <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 28px 30px;">
+    <div style="width: 100%; height: 2px; background: repeating-linear-gradient(90deg, #8a7351 0 6px, transparent 6px 11px);"></div>
+    <div style="font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.16em; color: #7a6749; text-align: center; line-height: 1.8;">NO ACCOUNT REQUIRED &middot; YOUR CIPHER IS YOUR PASSAGE<br>LOCATION IS READ ONLY WHILE THE HUNT RUNS</div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"sound":{"editor":"boolean","default":true,"section":"Feel"},"$preview":{"width":390,"height":844}}'>
+var SND = {
+  ctx: null,
+  ac: function () {
+    if (!this.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      this.ctx = new C();
+    }
+    if (this.ctx.state === 'suspended') { this.ctx.resume(); }
+    return this.ctx;
+  },
+  tone: function (freq, dur, type, vol, slideTo, delay) {
+    var c = this.ac();
+    if (!c) { return; }
+    var t = c.currentTime + (delay || 0);
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    if (slideTo) { o.frequency.exponentialRampToValueAtTime(slideTo, t + dur); }
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t);
+    o.stop(t + dur + 0.03);
+  },
+  noise: function (dur, freq, q, vol) {
+    var c = this.ac();
+    if (!c) { return; }
+    var n = Math.floor(c.sampleRate * dur);
+    var b = c.createBuffer(1, n, c.sampleRate);
+    var d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) { d[i] = (Math.random() * 2 - 1) * (1 - i / n); }
+    var s = c.createBufferSource();
+    s.buffer = b;
+    var f = c.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = freq;
+    f.Q.value = q || 1;
+    var g = c.createGain();
+    g.gain.value = vol || 0.2;
+    s.connect(f);
+    f.connect(g);
+    g.connect(c.destination);
+    s.start();
+  },
+  crack: function () { this.tone(60, 0.32, 'triangle', 0.46, 32); this.noise(0.18, 2200, 0.7, 0.28); },
+  chime: function () {
+    var self = this;
+    [523.25, 659.25, 783.99, 1046.5].forEach(function (f, i) {
+      self.tone(f, 0.5, 'triangle', 0.17, null, i * 0.08);
+    });
+  }
+};
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: false };
+  }
+  play(name) {
+    if (this.props.sound === false) { return; }
+    try { SND[name](); } catch (e) { }
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    var self = this;
+    return {
+      sealed: !this.state.open,
+      opened: this.state.open,
+      crack: function () {
+        self.play('crack');
+        setTimeout(function () { self.play('chime'); }, 240);
+        self.setState({ open: true });
+        clearTimeout(self._t);
+        self._t = setTimeout(function () { self.setState({ open: false }); }, 6500);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

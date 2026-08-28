@@ -1,0 +1,44 @@
+{
+  "pages": [
+    { "id": "page-1", "name": "The Hunt · player" },
+    { "id": "page-2", "name": "Command · organiser" }
+  ],
+  "artboards": [
+    { "file": "Join.dc.html", "x": 0, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "1 · Join", "is_interactive": true },
+    { "file": "Main.dc.html", "x": 470, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "2 · The clue screen", "is_interactive": true },
+    { "file": "Unlock.dc.html", "x": 940, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "3 · Nailed it", "is_interactive": true },
+    { "file": "Hints.dc.html", "x": 1410, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "4 · Need a hand", "is_interactive": true },
+    { "file": "Leaderboard.dc.html", "x": 1880, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "5 · Standings", "is_interactive": true },
+    { "file": "Recap.dc.html", "x": 2350, "y": 0, "w": 390, "h": 844, "page": "page-1", "title": "6 · The recap", "is_interactive": true },
+    { "file": "Studio.dc.html", "x": 0, "y": 0, "w": 1440, "h": 900, "page": "page-2", "title": "Hunt Studio · build the map", "is_interactive": true },
+    { "file": "RaceControl.dc.html", "x": 1560, "y": 0, "w": 1440, "h": 900, "page": "page-2", "title": "Race Control · run the day", "is_interactive": true },
+    { "file": "Spectator.dc.html", "x": 3120, "y": 0, "w": 1440, "h": 810, "page": "page-2", "title": "Big screen · lobby projection" }
+  ],
+  "annotations": [
+    {
+      "id": "direction",
+      "x": 0,
+      "y": -270,
+      "w": 620,
+      "page": "page-1",
+      "text": "WHITE, LOUD, FAST\n\nPure white ground, one electric accent doing the work, and huge tight display type. Colour only where something is happening.\n\nButtons are chunky pills that physically press down onto their own shadow. Sound is built live in the page — turn it up.\n\nLeft to right is the player's whole run."
+    },
+    {
+      "id": "energy",
+      "x": 940,
+      "y": -270,
+      "w": 430,
+      "page": "page-1",
+      "text": "The whole reward beat lives here: a check that punches in with a shockwave ring, points counting up, confetti, then the next clue rising.\n\nHit \"Play that again\" to replay it."
+    },
+    {
+      "id": "command",
+      "x": 0,
+      "y": -290,
+      "w": 660,
+      "page": "page-2",
+      "text": "COMMAND — the organiser's side\n\nThe hunt is a node graph on a dotted canvas: click any card to load it into the editor on the right. The animated dashes show which branches are live.\n\nRace Control runs the day — light map, vivid crew trails, alerts colour-coded by how much they should worry you. Try the pause button.\n\nCrew names, clue text and scores are sample copy, not real event data."
+    }
+  ],
+  "launch": { "view": "canvas", "page": "page-1" }
+}

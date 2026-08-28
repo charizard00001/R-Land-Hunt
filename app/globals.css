@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+/* ── The Cartographer's Dossier — design tokens ─────────────────────────────
+   Lifted from the design canvas: aged chart for the player, corkboard and
+   leather for the organiser, wood-type slab display, press-down controls. */
+
+@theme {
+  --color-parchment: #f0e4c6;
+  --color-parchment-2: #ddcfae;
+  --color-parchment-3: #c5b58e;
+  --color-card: #f6ecd0;
+  --color-card-2: #e6d8b4;
+
+  --color-ink: #241a12;
+  --color-ink-2: #5d4a30;
+  --color-ink-3: #7a6749;
+  --color-rule: #a8946c;
+  --color-rule-2: #97815a;
+
+  --color-wax: #b8332a;
+  --color-wax-2: #96231d;
+  --color-wax-3: #6a120e;
+  --color-wax-ink: #fbeeda;
+
+  --color-brass: #e0b25c;
+  --color-brass-2: #a67c2c;
+  --color-brass-3: #64460f;
+  --color-brass-ink: #2b1c06;
+
+  --color-moss: #2f5d3a;
+  --color-moss-2: #1e3f26;
+  --color-moss-ink: #eaf6ec;
+
+  --color-cork: #ab7540;
+  --color-leather: #241a12;
+  --color-leather-2: #141b21;
+  --color-slate: #0c1116;
+  --color-sea: #16303c;
+  --color-sea-ink: #dfe8ee;
+
+  --font-display: "Alfa Slab One", Georgia, serif;
+  --font-body: "Bitter", Georgia, serif;
+  --font-mono: "Courier Prime", "Courier New", monospace;
+}
+
+@layer base {
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--color-parchment-3);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
+  }
+  button { font: inherit; color: inherit; }
+  input, textarea, select { font: inherit; color: inherit; }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: var(--font-mono); }
+
+  .parchment {
+    background: radial-gradient(120% 80% at 20% 8%,
+      #f0e4c6 0%, #ddcfae 42%, #c5b58e 100%);
+  }
+  .parchment-flat { background: linear-gradient(#f6ecd0, #e6d8b4); }
+
+  /* Procedural paper tooth. No image files, nothing to load. */
+  .grain::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    opacity: 0.5; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.38'/%3E%3C/svg%3E");
+  }
+  .cork-board {
+    background-color: #ab7540;
+    background-image:
+      radial-gradient(circle at 30% 30%, rgba(255,224,180,0.18) 1px, transparent 1.7px),
+      radial-gradient(circle at 70% 70%, rgba(58,30,10,0.24) 1px, transparent 1.7px);
+    background-size: 9px 9px, 13px 13px;
+  }
+  .leather-grain {
+    background-color: #141b21;
+    background-image: radial-gradient(circle at 20% 30%, rgba(200,220,240,0.05) 1px, transparent 1.6px);
+    background-size: 7px 7px;
+  }
+
+  /* Controls are physical objects: they sit on a hard shadow and press onto it. */
+  .push {
+    transition: transform 120ms cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 120ms ease;
+  }
+  .push:active:not(:disabled) { transform: translateY(5px); box-shadow: none !important; }
+  .push:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .btn-wax {
+    background: linear-gradient(#c8392e, #96231d);
+    border: 2px solid var(--color-wax-3);
+    box-shadow: 0 6px 0 var(--color-wax-3), 0 12px 20px rgba(120,26,18,0.35);
+    color: var(--color-wax-ink);
+  }
+  .btn-brass {
+    background: linear-gradient(#e0b25c, #a67c2c);
+    border: 2px solid var(--color-brass-3);
+    box-shadow: inset 0 2px 0 rgba(255,248,220,0.6), 0 6px 0 #5c400f;
+    color: var(--color-brass-ink);
+  }
+  .btn-moss {
+    background: linear-gradient(#4a8a5e, #2f5d3a);
+    border: 2px solid var(--color-moss-2);
+    box-shadow: 0 6px 0 var(--color-moss-2);
+    color: var(--color-moss-ink);
+  }
+  .btn-paper {
+    background: linear-gradient(#efe1be, #ddcca4);
+    border: 2px solid var(--color-rule);
+    box-shadow: 0 4px 0 var(--color-rule-2);
+    color: var(--color-ink);
+  }
+  .btn-dark {
+    background: linear-gradient(#3a2a19, #241708);
+    border: 2px solid #120c05;
+    box-shadow: 0 5px 0 #1a120b;
+    color: #f6ecd6;
+  }
+
+  .field {
+    background: linear-gradient(#f8eed4, #e4d5b0);
+    border: 2px solid var(--color-rule);
+    box-shadow: 0 3px 0 var(--color-rule-2);
+    color: var(--color-ink);
+  }
+  .field:focus { outline: none; border-color: var(--color-wax); box-shadow: 0 3px 0 var(--color-wax-2); }
+
+  .tape {
+    background: rgba(226,208,164,0.82);
+    border-left: 1px solid rgba(160,140,100,0.5);
+    border-right: 1px solid rgba(160,140,100,0.5);
+    box-shadow: 0 1px 3px rgba(60,40,20,0.18);
+  }
+
+  .torn { clip-path: polygon(0 2%, 3% 0, 97% 1%, 100% 3%, 99% 97%, 96% 100%, 4% 99%, 1% 96%); }
+
+  /* ── motion: everything overshoots and settles ── */
+  .anim-slam { animation: slam 520ms cubic-bezier(0.16, 1.9, 0.36, 1) both; }
+  @keyframes slam {
+    0%   { transform: rotate(-9deg) scale(3); opacity: 0; }
+    48%  { transform: rotate(-9deg) scale(0.88); opacity: 1; }
+    68%  { transform: rotate(-7deg) scale(1.06); }
+    100% { transform: rotate(-9deg) scale(1); opacity: 1; }
+  }
+  .anim-shake { animation: shake 420ms cubic-bezier(0.36,0.07,0.19,0.97) both; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    15% { transform: translateX(-7px); } 30% { transform: translateX(6px); }
+    45% { transform: translateX(-4px); } 60% { transform: translateX(3px); }
+    80% { transform: translateX(-1px); }
+  }
+  .anim-pop { animation: popin 520ms cubic-bezier(0.16, 1.8, 0.36, 1) both; }
+  @keyframes popin {
+    0% { transform: scale(0.4); opacity: 0; }
+    60% { transform: scale(1.14); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .anim-rise { animation: rise 520ms cubic-bezier(0.2, 1.5, 0.4, 1) both; }
+  @keyframes rise {
+    0% { transform: translateY(20px) scale(0.94); opacity: 0; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  .anim-unfurl { animation: unfurl 420ms cubic-bezier(0.2, 1.5, 0.35, 1) both; }
+  @keyframes unfurl {
+    0% { opacity: 0; transform: translateY(-10px) scaleY(0.5); transform-origin: top; }
+    70% { opacity: 1; transform: translateY(0) scaleY(1.05); transform-origin: top; }
+    100% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  }
+  .anim-sway { animation: sway 3.1s cubic-bezier(0.45,0,0.55,1) infinite; transform-origin: 50% 78%; }
+  @keyframes sway {
+    0%,100% { transform: rotate(var(--bearing, 0deg)) translateY(0); }
+    50% { transform: rotate(calc(var(--bearing, 0deg) + 3deg)); }
+  }
+  .anim-pulse { animation: pulseDot 1.5s cubic-bezier(0.45,0,0.55,1) infinite; }
+  @keyframes pulseDot {
+    0%,100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+  .anim-blip { animation: blip 1.8s cubic-bezier(0.25,0.6,0.4,1) infinite; }
+  @keyframes blip {
+    0% { transform: scale(0.9); opacity: 0.9; }
+    70%,100% { transform: scale(2.2); opacity: 0; }
+  }
+  .anim-ticker { animation: ticker 34s linear infinite; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim-slam, .anim-shake, .anim-pop, .anim-rise, .anim-unfurl,
+    .anim-sway, .anim-pulse, .anim-blip, .anim-ticker { animation: none !important; }
+  }
+}
